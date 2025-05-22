@@ -8,13 +8,14 @@
                 <div class="card-header">{{ __('Register User') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/register') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/users/create' . $user->id) }}" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
 
                         {{-- name field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
 
                                 <label for="name" class="form-label">{{ __('Name') }}</label>
                                 @error('name')
@@ -28,7 +29,7 @@
                         {{-- email field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
 
                                 <label for="email" class="form-label">{{ __('Email Address') }}</label>
 
@@ -40,12 +41,12 @@
                             </div>
                         </div>
                         
-                        {{-- password field --}}
+                        {{-- Password field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password">
 
-                                <label for="password" class="form-label">{{ __('Password') }}</label>
+                                <label for="password" class="form-label">{{ __('Password') }} (leave blank to keep unchanged)</label>
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -55,25 +56,17 @@
                             </div>
                         </div>
 
-                        {{-- confirm password field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            
-                                <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                            </div>
-                        </div>
 
                         {{-- role field --}}
                         <div class="mb-3">
                             <div class="form-floating">
                                 <select class="form-select" name="role_id" id="role_id">
-                                    <option value="" disabled {{ old('role_id') ? '' : 'selected' }}>Select Role</option>
+                                    <option value="" disabled {{ old('role_id', $user->role_id) ? '' : 'selected' }}>Select Role</option>
                                     @foreach($roles as $role)
-                                    <option value="{{ $role['id'] }}" {{ old('role_id') == $role['id'] ? 'selected' : '' }}>
+                                    <option value="{{ $role['id'] }}" {{ old('role_id', $user->role_id) == $role['id'] ? 'selected' : '' }}>
                                     {{ $role['name'] }}
                                     </option>
-                                @endforeach
+                                    @endforeach
                                 </select>
 
                                 <label for="role_id" class="form-label">{{ __('Role') }}</label>
@@ -90,7 +83,7 @@
                         <div class="mb-3">
                             <div class="form-floating">
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                value="{{ old('phone') }}" required autocomplete="phone">
+                                value="{{ old('phone', $user->phone) }}" required autocomplete="phone">
 
                                 <label for="phone" class="form-label">{{ __('Phone') }}</label>
 
@@ -106,12 +99,12 @@
                         <div class="mb-3">
                             <div class="form-floating">
                                 <select class="form-select" name="state_id" id="state_id">
-                                    <option value="" disabled {{ old('state_id') ? '' : 'selected' }}>Select State</option>
+                                    <option value="" disabled {{ old('state_id', $user->state_id) ? '' : 'selected' }}>Select State</option>
                                     @foreach($states as $state)
-                                    <option value="{{ $state['id'] }}" {{ old('state_id') == $state['id'] ? 'selected' : '' }}>
+                                    <option value="{{ $state['id'] }}" {{ old('state_id', $user->role_id) == $state['id'] ? 'selected' : '' }}>
                                     {{ $state['name'] }}
                                     </option>
-                                @endforeach
+                                    @endforeach
                                 </select>
 
                                 <label for="state_id" class="form-label">{{ __('State') }}</label>
@@ -128,12 +121,12 @@
                         <div class="mb-3">
                             <div class="form-floating">
                                 <select class="form-select" name="town_id" id="town_id">
-                                    <option value="" disabled {{ old('town_id') ? '' : 'selected' }}>Select Town</option>
+                                    <option value="" disabled {{ old('town_id', $user->town_id) ? '' : 'selected' }}>Select Town</option>
                                     @foreach($towns as $town)
-                                    <option value="{{ $town['id'] }}" {{ old('town_id') == $town['id'] ? 'selected' : '' }}>
+                                    <option value="{{ $town['id'] }}" {{ old('town_id', $user->town_id) == $town['id'] ? 'selected' : '' }}>
                                     {{ $town['name'] }}
                                     </option>
-                                @endforeach
+                                    @endforeach
                                 </select>
 
                                 <label for="town_id" class="form-label">{{ __('Town') }}</label>
@@ -146,7 +139,7 @@
                             </div>
                         </div>
                         
-                        {{-- Profile field --}}
+                        {{-- profile field --}}
                         <div class="mb-3">
                             <div class="form-floating">
                                 <input class="form-control" type="file" name="profile" id="profile" required>
@@ -160,13 +153,20 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        {{-- Show current profile image --}}
+                        @if($user->profile)
+                        <div class="mb-3 text-start">
+                            <img src="{{ asset('storage/' . $user->profile) }}" alt="{{ $user->name }}" class="img-thumbnail" style="max-width: 150px;">
+                        </div>
+                        @endif
 
                         {{-- submit cancel buttons --}}
                         <div class="row mb-0">
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ url('/home') }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    {{ __('Update') }}
                                 </button>
                             </div>
                         </div>

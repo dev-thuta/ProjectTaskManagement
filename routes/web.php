@@ -38,6 +38,18 @@ Route::post('/users/create', [
     UserController::class,
     'create'
 ]);
+Route::get('/users/edit/{id}', [
+    UserController::class,
+    'edit'
+]);
+Route::post('/users/update', [
+    UserController::class,
+    'update'
+]);
+Route::get('users/delete/{id}', [
+    UserController::class,
+    'delete'
+]);
 
 // roles
 Route::get('/roles', [

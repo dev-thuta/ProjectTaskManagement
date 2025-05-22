@@ -64,4 +64,32 @@ class UserController extends Controller
 
         return redirect('/users')->with('success', 'User created successfully.');
     }
+
+    public function edit($id)
+    {
+        $roledata = Role::all();
+        $statedata = State::all();
+        $towndata = Town::all();
+        $data = User::findOrFail($id);
+
+        return view('users.edit', [
+            'roles' => $roledata,
+            'states' => $statedata,
+            'towns' => $towndata,
+            'user' => $data,
+        ]);
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/users')->with('success', 'User deleted successfully.');
+    }
 }

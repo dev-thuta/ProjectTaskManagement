@@ -78,7 +78,7 @@
 
                                 <label for="role_id" class="form-label">{{ __('Role') }}</label>
 
-                                @error('password')
+                                @error('role_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -116,7 +116,7 @@
 
                                 <label for="state_id" class="form-label">{{ __('State') }}</label>
 
-                                @error('state')
+                                @error('state_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -138,7 +138,7 @@
 
                                 <label for="town_id" class="form-label">{{ __('Town') }}</label>
 
-                                @error('town')
+                                @error('town_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
