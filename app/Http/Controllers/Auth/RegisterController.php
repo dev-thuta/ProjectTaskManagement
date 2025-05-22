@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\Town;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Models\State;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -40,6 +43,17 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function add()
+    {
+        $roledata = Role::all();
+        $statedata = State::all();
+        $towndata = Town::all();
+        return view('auth.register', [
+            'roles' => $roledata,
+            'states' => $statedata,
+            'towns' => $towndata,
+        ]);
+    }
     /**
      * Get a validator for an incoming registration request.
      *
