@@ -5,6 +5,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,12 +24,18 @@ Route::get('/', function () {
 
 // auth
 Auth::routes();
-Route::get('/register', [
-    RegisterController::class,
+
+// users
+Route::get('/users', [
+    UserController::class,
+    'index'
+]);
+Route::get('/users/add', [
+    UserController::class,
     'add'
 ]);
-Route::post('/register/create', [
-    RegisterController::class,
+Route::post('/users/create', [
+    UserController::class,
     'create'
 ]);
 

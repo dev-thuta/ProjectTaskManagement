@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register User') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/register') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/users/create') }}" enctype="multipart/form-data">
                         @csrf
 
                         {{-- name field --}}
@@ -164,7 +164,7 @@
                         {{-- submit cancel buttons --}}
                         <div class="row mb-0">
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ url('/home') }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>

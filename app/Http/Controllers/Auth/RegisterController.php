@@ -43,7 +43,7 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function add()
+    public function showRegistrationForm()
     {
         $roledata = Role::all();
         $statedata = State::all();
@@ -66,6 +66,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role_id' => ['required'],
+            'phone' => ['required', 'numeric'],
+            'state_id' => ['required'],
+            'town_id' => ['required'],
+            'profile' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ]);
     }
 
@@ -77,10 +82,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (request()->hasFile('profile')) {
+            $imagePath = request()->file('profile')->store('profiles', 'public');
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => $data['role_id'],
+            'phone' => $data['phone'],
+            'state_id' => $data['state_id'],
+            'town_id' => $data['town_id'],
+            'profile' => $imagePath,
         ]);
     }
 }
