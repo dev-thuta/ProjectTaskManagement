@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register User') }}</div>
+                <div class="card-header">{{ __('Update User') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/users/create' . $user->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/users/update/' . $user->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -101,7 +101,7 @@
                                 <select class="form-select" name="state_id" id="state_id">
                                     <option value="" disabled {{ old('state_id', $user->state_id) ? '' : 'selected' }}>Select State</option>
                                     @foreach($states as $state)
-                                    <option value="{{ $state['id'] }}" {{ old('state_id', $user->role_id) == $state['id'] ? 'selected' : '' }}>
+                                    <option value="{{ $state['id'] }}" {{ old('state_id', $user->state_id) == $state['id'] ? 'selected' : '' }}>
                                     {{ $state['name'] }}
                                     </option>
                                     @endforeach
@@ -142,7 +142,7 @@
                         {{-- profile field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input class="form-control" type="file" name="profile" id="profile" required>
+                                <input class="form-control" type="file" name="profile" id="profile">
 
                                 <label for="profile" class="form-label">{{ __('Pofile') }}</label>
 
@@ -155,19 +155,20 @@
                         </div>
                         
                         {{-- Show current profile image --}}
-                        @if($user->profile)
-                        <div class="mb-3 text-start">
-                            <img src="{{ asset('storage/' . $user->profile) }}" alt="{{ $user->name }}" class="img-thumbnail" style="max-width: 150px;">
-                        </div>
-                        @endif
-
-                        {{-- submit cancel buttons --}}
-                        <div class="row mb-0">
-                            <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update') }}
-                                </button>
+                        <div class="row mb-3 align-items-center">
+                            @if($user->profile)
+                            <div class="col-auto">
+                                <label class="form-label d-block mb-2">{{ __('Current Profile Image') }}</label>
+                                <img src="{{ asset('storage/' . $user->profile) }}" alt="{{ $user->name }}" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                            @endif
+                            <div class="col">
+                                <div class="d-flex justify-content-end gap-2 mb-5">
+                                    <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
+                                    <button type="submit" class="btn btn-primary">
+                                        {{ __('Update') }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>

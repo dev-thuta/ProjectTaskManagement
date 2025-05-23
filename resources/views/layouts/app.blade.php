@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ preg_replace('/(?<!^)([a-z])([A-Z])/', '$1 $2', config('app.name', 'Laravel')) }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -75,9 +75,41 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="row m-1">
+            {{-- sidebar --}}
+            <nav class="col-2 p-1 sticky-top" style="height: fit-content;">
+                <h1 class="h4 pt-3 text-center">
+                    <a href="{{ url('/')}}" class="text-decoration-none text-secondary"><i class="fa-solid fa-thumbtack"></i></a>
+                </h1>
+                <div class="list-group text-center text-lg-start mx-2 mb-4">
+                    <span class="list-group-item disabled d-none d-lg-block">
+                        <small>Master Data</small>
+                    </span>
+                    <a href="{{ url('/states') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('states*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span class="d-none d-lg-inline ms-2">States</span>
+                    </a>
+                    <a href="{{ url('/towns') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('towns*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span class="d-none d-lg-inline ms-2">Towns</span>
+                    </a>
+                    <a href="{{ url('/roles') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('roles*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <i class="fa-solid fa-user-gear"></i>
+                    <span class="d-none d-lg-inline ms-2">Roles</span>
+                    </a>
+                    <a href="{{ url('/users') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('users*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="d-none d-lg-inline ms-2">Users</span>
+                    </a>
+                </div>
+            </nav>
+
+            {{-- main content --}}
+            <main class="col-10 bg-light py-4">
+                @yield('content')
+            </main>
+
+        </div>
     </div>
 </body>
 @stack('scripts')

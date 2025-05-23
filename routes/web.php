@@ -42,7 +42,7 @@ Route::get('/users/edit/{id}', [
     UserController::class,
     'edit'
 ]);
-Route::post('/users/update', [
+Route::put('/users/update/{id}', [
     UserController::class,
     'update'
 ]);
@@ -64,6 +64,18 @@ Route::post('/roles/create', [
     RoleController::class,
     'create'
 ]);
+Route::get('/roles/edit/{id}', [
+    RoleController::class,
+    'edit'
+]);
+Route::put('/roles/update/{id}', [
+    RoleController::class,
+    'update'
+]);
+Route::get('roles/delete/{id}', [
+    RoleController::class,
+    'delete'
+]);
 
 // states
 Route::get('/states', [
@@ -78,6 +90,18 @@ Route::post('/states/create', [
     StateController::class,
     'create'
 ]);
+Route::get('/states/edit/{id}', [
+    StateController::class,
+    'edit'
+]);
+Route::put('/states/update/{id}', [
+    StateController::class,
+    'update'
+]);
+Route::get('states/delete/{id}', [
+    StateController::class,
+    'delete'
+]);
 
 // towns
 Route::get('/towns', [
@@ -91,6 +115,18 @@ Route::get('/towns/add', [
 Route::post('/towns/create', [
     TownController::class,
     'create'
+]);
+Route::get('/towns/edit/{id}', [
+    TownController::class,
+    'edit'
+]);
+Route::put('/towns/update/{id}', [
+    TownController::class,
+    'update'
+]);
+Route::get('towns/delete/{id}', [
+    TownController::class,
+    'delete'
 ]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
