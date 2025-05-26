@@ -74,7 +74,7 @@
                         {{-- submit cancel buttons --}}
                         <div class="row mb-0">
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ url('/clients') }}" class="btn btn-danger">Cancel</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
@@ -87,37 +87,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const stateSelect = document.getElementById('state_id');
-            const townSelect = document.getElementById('town_id');
-            const allTowns = @json($towns);
-
-            function filterTownsByState(stateId) {
-                while (townSelect.options.length > 1) {
-                    townSelect.remove(1);
-                }
-                if (!stateId) return;
-                allTowns.forEach(function (town) {
-                    if (town.state_id == stateId) {
-                        const option = document.createElement('option');
-                        option.value = town.id;
-                        option.text = town.name;
-                        if ("{{ old('town_id') }}" == town.id) {
-                            option.selected = true;
-                        }
-                        townSelect.appendChild(option);
-                    }
-                });
-            }
-
-            stateSelect.addEventListener('change', function () {
-                filterTownsByState(this.value);
-            });
-
-            filterTownsByState(stateSelect.value);
-        });
-    </script>
-@endpush

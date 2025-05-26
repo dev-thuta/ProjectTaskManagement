@@ -100,8 +100,8 @@ Route::put('/clients/update/{id}', [
     ClientController::class,
     'update'
 ]);
-Route::get('roles/delete/{id}', [
-    RoleController::class,
+Route::get('clients/delete/{id}', [
+    ClientController::class,
     'delete'
 ]);
 
