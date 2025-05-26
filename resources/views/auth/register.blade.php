@@ -151,7 +151,7 @@
                             <div class="form-floating">
                                 <input class="form-control" type="file" name="profile" id="profile" required>
 
-                                <label for="profile" class="form-label">{{ __('Pofile') }}</label>
+                                <label for="profile" class="form-label">{{ __('Profile') }}</label>
 
                                 @error('profile')
                                     <span class="invalid-feedback" role="alert">

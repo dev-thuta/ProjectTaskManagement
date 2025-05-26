@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TownController;
-use App\Http\Controllers\StateController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StateController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +72,32 @@ Route::get('/roles/edit/{id}', [
 ]);
 Route::put('/roles/update/{id}', [
     RoleController::class,
+    'update'
+]);
+Route::get('roles/delete/{id}', [
+    RoleController::class,
+    'delete'
+]);
+
+// clients
+Route::get('/clients', [
+    ClientController::class,
+    'index'
+]);
+Route::get('/clients/add', [
+    ClientController::class,
+    'add'
+]);
+Route::post('/clients/create', [
+    ClientController::class,
+    'create'
+]);
+Route::get('/clients/edit/{id}', [
+    ClientController::class,
+    'edit'
+]);
+Route::put('/clients/update/{id}', [
+    ClientController::class,
     'update'
 ]);
 Route::get('roles/delete/{id}', [

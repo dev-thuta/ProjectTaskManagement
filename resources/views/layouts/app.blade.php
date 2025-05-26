@@ -85,21 +85,25 @@
                     <span class="list-group-item disabled d-none d-lg-block">
                         <small>Master Data</small>
                     </span>
-                    <a href="{{ url('/states') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('states*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <a href="{{ url('/states') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('states*') ? 'bg-secondary text-light' : 'text-secondary' }}">
                     <i class="fa-solid fa-map-location-dot"></i>
                     <span class="d-none d-lg-inline ms-2">States</span>
                     </a>
-                    <a href="{{ url('/towns') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('towns*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <a href="{{ url('/towns') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('towns*') ? 'bg-secondary text-light' : 'text-secondary' }}">
                     <i class="fa-solid fa-location-dot"></i>
                     <span class="d-none d-lg-inline ms-2">Towns</span>
                     </a>
-                    <a href="{{ url('/roles') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('roles*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <a href="{{ url('/roles') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('roles*') ? 'bg-secondary text-light' : 'text-secondary' }}">
                     <i class="fa-solid fa-user-gear"></i>
                     <span class="d-none d-lg-inline ms-2">Roles</span>
                     </a>
-                    <a href="{{ url('/users') }}" class="list-group-item list-grop-item action text-secondary {{ Request::is('users*') ? 'bg-secondary text-light' : 'text-secondary' }}">
-                    <i class="fa-solid fa-user"></i>
+                    <a href="{{ url('/users') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('users*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <i class="fa-solid fa-id-card"></i>
                     <span class="d-none d-lg-inline ms-2">Users</span>
+                    </a>
+                    <a href="{{ url('/clients') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('clients*') ? 'bg-secondary text-light' : 'text-secondary' }}">
+                    <i class="fa-solid fa-user-group"></i>
+                    <span class="d-none d-lg-inline ms-2">Clients</span>
                     </a>
                 </div>
             </nav>

@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register User') }}</div>
+                <div class="card-header">{{ __('Register Client') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/users/create') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/clients/create') }}" enctype="multipart/form-data">
                         @csrf
 
                         {{-- name field --}}
@@ -40,52 +40,6 @@
                             </div>
                         </div>
                         
-                        {{-- password field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                <label for="password" class="form-label">{{ __('Password') }}</label>
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        {{-- confirm password field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            
-                                <label for="password-confirm" class="form-label">{{ __('Confirm Password') }}</label>
-                            </div>
-                        </div>
-
-                        {{-- role field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" name="role_id" id="role_id">
-                                    <option value="" disabled {{ old('role_id') ? '' : 'selected' }}>Select Role</option>
-                                    @foreach($roles as $role)
-                                    <option value="{{ $role['id'] }}" {{ old('role_id') == $role['id'] ? 'selected' : '' }}>
-                                    {{ $role['name'] }}
-                                    </option>
-                                @endforeach
-                                </select>
-
-                                <label for="role_id" class="form-label">{{ __('Role') }}</label>
-
-                                @error('role_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
                         {{-- phone field --}}
                         <div class="mb-3">
                             <div class="form-floating">
@@ -95,50 +49,6 @@
                                 <label for="phone" class="form-label">{{ __('Phone') }}</label>
 
                                 @error('phone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        {{-- State field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" name="state_id" id="state_id">
-                                    <option value="" disabled {{ old('state_id') ? '' : 'selected' }}>Select State</option>
-                                    @foreach($states as $state)
-                                    <option value="{{ $state['id'] }}" {{ old('state_id') == $state['id'] ? 'selected' : '' }}>
-                                    {{ $state['name'] }}
-                                    </option>
-                                @endforeach
-                                </select>
-
-                                <label for="state_id" class="form-label">{{ __('State') }}</label>
-
-                                @error('state_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        {{-- Town field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" name="town_id" id="town_id">
-                                    <option value="" disabled {{ old('town_id') ? '' : 'selected' }}>Select Town</option>
-                                    @foreach($towns as $town)
-                                    <option value="{{ $town['id'] }}" {{ old('town_id') == $town['id'] ? 'selected' : '' }}>
-                                    {{ $town['name'] }}
-                                    </option>
-                                @endforeach
-                                </select>
-
-                                <label for="town_id" class="form-label">{{ __('Town') }}</label>
-
-                                @error('town_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
