@@ -14,7 +14,7 @@
                         {{-- name field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                 <label for="name" class="form-label">{{ __('Name') }}</label>
                                 @error('name')
@@ -28,7 +28,7 @@
                         {{-- State field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select" name="state_id" id="state_id">
+                                <select class="form-select @error('state_id') is-invalid @enderror"" name="state_id" id="state_id">
                                     <option value="" disabled {{ old('state_id') ? '' : 'selected' }}>Select State</option>
                                     @foreach($states as $state)
                                     <option value="{{ $state['id'] }}" {{ old('state_id') == $state['id'] ? 'selected' : '' }}>
@@ -39,7 +39,7 @@
 
                                 <label for="state_id" class="form-label">{{ __('State') }}</label>
 
-                                @error('state')
+                                @error('state_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

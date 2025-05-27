@@ -14,7 +14,7 @@
                         {{-- name field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
 
                                 <label for="name" class="form-label">{{ __('Name') }}</label>
                                 @error('name')

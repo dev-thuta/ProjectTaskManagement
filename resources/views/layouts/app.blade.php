@@ -77,36 +77,60 @@
 
         <div class="row m-1">
             {{-- sidebar --}}
-            <nav class="col-2 p-1 sticky-top" style="height: fit-content;">
-                <h1 class="h4 pt-3 text-center">
-                    <a href="{{ url('/')}}" class="text-decoration-none text-secondary"><i class="fa-solid fa-thumbtack"></i></a>
-                </h1>
-                <div class="list-group text-center text-lg-start mx-2 mb-4">
-                    <span class="list-group-item disabled d-none d-lg-block">
-                        <small>Master Data</small>
-                    </span>
-                    <a href="{{ url('/states') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('states*') ? 'bg-secondary text-light' : 'text-secondary' }}">
-                    <i class="fa-solid fa-map-location-dot"></i>
-                    <span class="d-none d-lg-inline ms-2">States</span>
-                    </a>
-                    <a href="{{ url('/towns') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('towns*') ? 'bg-secondary text-light' : 'text-secondary' }}">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span class="d-none d-lg-inline ms-2">Towns</span>
-                    </a>
-                    <a href="{{ url('/roles') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('roles*') ? 'bg-secondary text-light' : 'text-secondary' }}">
-                    <i class="fa-solid fa-user-gear"></i>
-                    <span class="d-none d-lg-inline ms-2">Roles</span>
-                    </a>
-                    <a href="{{ url('/users') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('users*') ? 'bg-secondary text-light' : 'text-secondary' }}">
-                    <i class="fa-solid fa-id-card"></i>
-                    <span class="d-none d-lg-inline ms-2">Users</span>
-                    </a>
-                    <a href="{{ url('/clients') }}" class="list-group-item list-group-item action text-secondary {{ Request::is('clients*') ? 'bg-secondary text-light' : 'text-secondary' }}">
-                    <i class="fa-solid fa-user-group"></i>
-                    <span class="d-none d-lg-inline ms-2">Clients</span>
+            <aside class="col-2 p-0 bg-white border-end min-vh-100 d-flex flex-column align-items-stretch sticky-top shadow-sm" style="height: 100vh;">
+                <div class="py-3 text-center border-bottom">
+                    <a href="{{ url('/') }}" class="text-decoration-none text-dark fs-4">
+                        <i class="fa-solid fa-home"></i>
+                        <span class="d-none d-lg-inline ms-2">Home</span>
                     </a>
                 </div>
-            </nav>
+                <div class="flex-grow-1 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="list-group list-group-flush text-center text-lg-start mb-3">
+                            <span class="list-group-item disabled d-none d-lg-block bg-white border-0">
+                                <small class="text-muted">Master Data</small>
+                            </span>
+                            <a href="{{ url('/states') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('states*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                                <span class="d-none d-lg-inline ms-2">States</span>
+                            </a>
+                            <a href="{{ url('/towns') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('towns*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span class="d-none d-lg-inline ms-2">Towns</span>
+                            </a>
+                            <a href="{{ url('/roles') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('roles*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-user-gear"></i>
+                                <span class="d-none d-lg-inline ms-2">Roles</span>
+                            </a>
+                        </div>
+                        <div class="list-group list-group-flush text-center text-lg-start mb-3">
+                            <span class="list-group-item disabled d-none d-lg-block bg-white border-0">
+                                <small class="text-muted">Transactions</small>
+                            </span>
+                            <a href="{{ url('/users') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('users*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-user-check"></i>
+                                <span class="d-none d-lg-inline ms-2">Users</span>
+                            </a>
+                            <a href="{{ url('/clients') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('clients*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-handshake"></i>
+                                <span class="d-none d-lg-inline ms-2">Clients</span>
+                            </a>
+                            <a href="{{ url('/projects') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('projects*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-diagram-project"></i>
+                                <span class="d-none d-lg-inline ms-2">Projects</span>
+                            </a>
+                            <a href="{{ url('/teams') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('teams*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-users-gear"></i>
+                                <span class="d-none d-lg-inline ms-2">Teams</span>
+                            </a>
+                            <a href="{{ url('/team-members') }}" class="list-group-item list-group-item-action border-0 rounded-0 {{ Request::is('team-members*') ? 'active bg-secondary text-light' : 'text-secondary' }}">
+                                <i class="fa-solid fa-users"></i>
+                                <span class="d-none d-lg-inline ms-2">Team Members</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
 
             {{-- main content --}}
             <main class="col-10 bg-light py-4">

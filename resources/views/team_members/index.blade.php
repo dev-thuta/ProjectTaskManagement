@@ -10,8 +10,8 @@
     <div class="row justify-content-center">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('Role List') }}
-                <a href="{{ url('/roles/add')}}" class="btn btn-primary float-end">Add</a>
+                <div class="card-header">{{ __('Team Member List') }}
+                <a href="{{ url('/team-members/add')}}" class="btn btn-primary float-end">Add</a>
                 </div>
 
                 <div class="card-body">
@@ -20,25 +20,27 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
+                                    <th>Team</th>
+                                    <th>Member</th>
+                                    <th>Role</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i = ($roles instanceof \Illuminate\Pagination\LengthAwarePaginator) ? $roles->firstItem() : 1; @endphp
-                                @foreach ($roles as $role)
+                                @php $i = ($teammembers instanceof \Illuminate\Pagination\LengthAwarePaginator) ? $teammembers->firstItem() : 1; @endphp
+                                @foreach ($teammembers as $teammember)
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $role['name'] }}</td>
-                                        <td>{{ $role['description'] }}</td>
-                                        <td>{{ $role['created_at'] ? $role['created_at']->format('Y-m-d') : 'N/A' }}</td>
-                                        <td>{{ $role['updated_at'] ? $role['updated_at']->diffForHumans() : 'N/A' }}</td>
+                                        <td>{{ $teammember->team->name }}</td>
+                                        <td>{{ $teammember->user->name }}</td>
+                                        <td>{{ $teammember['role'] }}</td>
+                                        <td>{{ $teammember['created_at']->format('Y-m-d') }}</td>
+                                        <td>{{ $teammember->updated_at->diffForHumans() }}</td>
                                         <td>
-                                            <a href="{{ url("/roles/edit/$role->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/roles/delete/$role->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="{{ url("/team-members/edit/$teammember->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/team-members/delete/$teammember->id") }}"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -48,7 +50,7 @@
                 </div>
                 <div class="card-footer">
                     <div class="d-flex justify-content-center align-items-center">
-                    {{ $roles->links() }}
+                    {{ $teammembers->links() }}
                     </div>
                 </div>
             </div>

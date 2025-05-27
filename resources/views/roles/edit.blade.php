@@ -15,7 +15,7 @@
                         {{-- name field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $role->name) }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $role->name) }}" autocomplete="name" autofocus>
 
                                 <label for="name" class="form-label">{{ __('Name') }}</label>
                                 @error('name')
@@ -29,7 +29,7 @@
                         {{-- description field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description">{{ old('description', $role->description) }}</textarea>
+                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" autocomplete="description">{{ old('description', $role->description) }}</textarea>
 
                                 <label for="description" class="form-label">{{ __('Description') }}</label>
 

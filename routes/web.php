@@ -3,10 +3,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\Team_memberController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -154,6 +157,84 @@ Route::put('/towns/update/{id}', [
 ]);
 Route::get('towns/delete/{id}', [
     TownController::class,
+    'delete'
+]);
+
+// projects
+Route::get('/projects', [
+    ProjectController::class,
+    'index'
+]);
+Route::get('/projects/add', [
+    ProjectController::class,
+    'add'
+]);
+Route::post('/projects/create', [
+    ProjectController::class,
+    'create'
+]);
+Route::get('/projects/edit/{id}', [
+    ProjectController::class,
+    'edit'
+]);
+Route::put('/projects/update/{id}', [
+    ProjectController::class,
+    'update'
+]);
+Route::get('projects/delete/{id}', [
+    ProjectController::class,
+    'delete'
+]);
+
+// teams
+Route::get('/teams', [
+    TeamController::class,
+    'index'
+]);
+Route::get('/teams/add', [
+    TeamController::class,
+    'add'
+]);
+Route::post('/teams/create', [
+    TeamController::class,
+    'create'
+]);
+Route::get('/teams/edit/{id}', [
+    TeamController::class,
+    'edit'
+]);
+Route::put('/teams/update/{id}', [
+    TeamController::class,
+    'update'
+]);
+Route::get('teams/delete/{id}', [
+    TeamController::class,
+    'delete'
+]);
+
+// team members
+Route::get('/team-members', [
+    Team_memberController::class,
+    'index'
+]);
+Route::get('/team-members/add', [
+    Team_memberController::class,
+    'add'
+]);
+Route::post('/team-members/create', [
+    Team_memberController::class,
+    'create'
+]);
+Route::get('/team-members/edit/{id}', [
+    Team_memberController::class,
+    'edit'
+]);
+Route::put('/team-members/update/{id}', [
+    Team_memberController::class,
+    'update'
+]);
+Route::get('team-members/delete/{id}', [
+    Team_memberController::class,
     'delete'
 ]);
 

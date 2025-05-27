@@ -15,7 +15,7 @@
                         {{-- name field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $user->name) }}" autocomplete="name" autofocus>
 
                                 <label for="name" class="form-label">{{ __('Name') }}</label>
                                 @error('name')
@@ -29,7 +29,7 @@
                         {{-- email field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', $user->email) }}" autocomplete="email">
 
                                 <label for="email" class="form-label">{{ __('Email Address') }}</label>
 
@@ -60,7 +60,7 @@
                         {{-- role field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select" name="role_id" id="role_id">
+                                <select class="form-select @error('role_id') is-invalid @enderror" name="role_id" id="role_id">
                                     <option value="" disabled {{ old('role_id', $user->role_id) ? '' : 'selected' }}>Select Role</option>
                                     @foreach($roles as $role)
                                     <option value="{{ $role['id'] }}" {{ old('role_id', $user->role_id) == $role['id'] ? 'selected' : '' }}>
@@ -83,7 +83,7 @@
                         <div class="mb-3">
                             <div class="form-floating">
                                 <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
-                                value="{{ old('phone', $user->phone) }}" required autocomplete="phone">
+                                value="{{ old('phone', $user->phone) }}" autocomplete="phone">
 
                                 <label for="phone" class="form-label">{{ __('Phone') }}</label>
 
@@ -98,7 +98,7 @@
                         {{-- State field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select" name="state_id" id="state_id">
+                                <select class="form-select @error('state_id') is-invalid @enderror" name="state_id" id="state_id">
                                     <option value="" disabled {{ old('state_id', $user->state_id) ? '' : 'selected' }}>Select State</option>
                                     @foreach($states as $state)
                                     <option value="{{ $state['id'] }}" {{ old('state_id', $user->state_id) == $state['id'] ? 'selected' : '' }}>
@@ -120,7 +120,7 @@
                         {{-- Town field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select" name="town_id" id="town_id">
+                                <select class="form-select @error('town_id') is-invalid @enderror" name="town_id" id="town_id">
                                     <option value="" disabled {{ old('town_id', $user->town_id) ? '' : 'selected' }}>Select Town</option>
                                     @foreach($towns as $town)
                                     <option value="{{ $town['id'] }}" {{ old('town_id', $user->town_id) == $town['id'] ? 'selected' : '' }}>
@@ -145,12 +145,6 @@
                                 <input class="form-control" type="file" name="profile" id="profile">
 
                                 <label for="profile" class="form-label">{{ __('Profile') }}</label>
-
-                                @error('profile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
                         

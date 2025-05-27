@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register Role') }}</div>
+                <div class="card-header">{{ __('Register Team') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/roles/create') }}">
+                    <form method="POST" action="{{ url('/teams/create') }}" enctype="multipart/form-data">
                         @csrf
 
                         {{-- name field --}}
@@ -24,11 +24,33 @@
                                 @enderror
                             </div>
                         </div>
+                        
+                        {{-- Project field --}}
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <select class="form-select @error('project_id') is-invalid @enderror" name="project_id" id="project_id">
+                                    <option value="" disabled {{ old('project_id') ? '' : 'selected' }}>Select Project</option>
+                                    @foreach($projects as $project)
+                                    <option value="{{ $project['id'] }}" {{ old('project_id') == $project['id'] ? 'selected' : '' }}>
+                                    {{ $project['name'] }}
+                                    </option>
+                                @endforeach
+                                </select>
+
+                                <label for="project_id" class="form-label">{{ __('Project') }}</label>
+
+                                @error('project_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         {{-- description field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" autocomplete="description">{{ old('description') }}</textarea>
+                                <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" autocomplete="description">{{ old('description') }}</textarea>
 
                                 <label for="description" class="form-label">{{ __('Description') }}</label>
 
@@ -43,7 +65,7 @@
                         {{-- submit cancel buttons --}}
                         <div class="row mb-0">
                             <div class="d-flex justify-content-end gap-2">
-                                <a href="{{ url('/roles') }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ url('/teams') }}" class="btn btn-danger">Cancel</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
