@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
-use App\Models\Team_member;
+use App\Models\TeamMember;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class Team_memberController extends Controller
+class TeamMemberController extends Controller
 {
     public function index()
     {
-        $data = Team_member::with('team', 'user')->orderBy('team_id', 'asc')->paginate(7);
+        $data = TeamMember::with('team', 'user')->orderBy('team_id', 'asc')->paginate(7);
         return view('team_members.index', [
             'teammembers' => $data
         ]);
@@ -49,7 +49,7 @@ class Team_memberController extends Controller
             return back()->withErrors($validator)->withInput();
         }
 
-        $team_member = new Team_member();
+        $team_member = new TeamMember();
         $team_member->team_id = request()->team_id;
         $team_member->user_id = request()->user_id;
         $team_member->role = request()->role;
@@ -60,7 +60,7 @@ class Team_memberController extends Controller
 
     public function edit($id)
     {
-        $data = Team_member::findOrFail($id);
+        $data = TeamMember::findOrFail($id);
         $userdata = User::where('role_id', 2)->get();
         $teamdata = Team::whereIn('project_id', function($query) {
             $query->select('id')
@@ -77,7 +77,7 @@ class Team_memberController extends Controller
 
     public function update(Request $request, $id)
     {
-        $teammember = Team_member::findOrFail($id);
+        $teammember = TeamMember::findOrFail($id);
         $validator = validator(request()->all(), [
             'team_id' => ['required'],
             'user_id' => [
@@ -103,7 +103,7 @@ class Team_memberController extends Controller
 
     public function delete($id)
     {
-        $teammember = Team_member::find($id);
+        $teammember = TeamMember::find($id);
         $teammember->delete();
 
         return redirect('/team-members')->with('success', 'Team Member deleted successfully.');

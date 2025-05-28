@@ -3,13 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\Team_memberController;
+use App\Http\Controllers\AssignToController;
+use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\Auth\RegisterController;
 
 /*
@@ -30,7 +32,8 @@ Route::get('/', function () {
 // auth
 Auth::routes();
 
-// users
+Route::middleware(['auth'])->group(function () {
+    // users
 Route::get('/users', [
     UserController::class,
     'index'
@@ -214,28 +217,82 @@ Route::get('teams/delete/{id}', [
 
 // team members
 Route::get('/team-members', [
-    Team_memberController::class,
+    TeamMemberController::class,
     'index'
 ]);
 Route::get('/team-members/add', [
-    Team_memberController::class,
+    TeamMemberController::class,
     'add'
 ]);
 Route::post('/team-members/create', [
-    Team_memberController::class,
+    TeamMemberController::class,
     'create'
 ]);
 Route::get('/team-members/edit/{id}', [
-    Team_memberController::class,
+    TeamMemberController::class,
     'edit'
 ]);
 Route::put('/team-members/update/{id}', [
-    Team_memberController::class,
+    TeamMemberController::class,
     'update'
 ]);
 Route::get('team-members/delete/{id}', [
-    Team_memberController::class,
+    TeamMemberController::class,
     'delete'
 ]);
+
+// tasks
+Route::get('/tasks', [
+    TaskController::class,
+    'index'
+]);
+Route::get('/tasks/add', [
+    TaskController::class,
+    'add'
+]);
+Route::post('/tasks/create', [
+    TaskController::class,
+    'create'
+]);
+Route::get('/tasks/edit/{id}', [
+    TaskController::class,
+    'edit'
+]);
+Route::put('/tasks/update/{id}', [
+    TaskController::class,
+    'update'
+]);
+Route::get('tasks/delete/{id}', [
+    TaskController::class,
+    'delete'
+]);
+
+// assigns
+Route::get('/assigns', [
+    AssignToController::class,
+    'index'
+]);
+Route::get('/assigns/add/{id}', [
+    AssignToController::class,
+    'add'
+]);
+Route::post('/assigns/create', [
+    AssignToController::class,
+    'create'
+]);
+Route::get('/assigns/edit/{id}', [
+    AssignToController::class,
+    'edit'
+]);
+Route::put('/assigns/update/{id}', [
+    AssignToController::class,
+    'update'
+]);
+Route::get('assigns/delete/{id}', [
+    AssignToController::class,
+    'delete'
+]);
+
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

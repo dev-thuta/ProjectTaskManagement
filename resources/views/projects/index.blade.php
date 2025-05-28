@@ -41,7 +41,15 @@
                                         <td>{{ $project['description'] }}</td>
                                         <td>{{ \Carbon\Carbon::parse($project['start_date'])->format('d F Y') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($project['end_date'])->format('d F Y') }}</td>
-                                        <td>{{ $project['status'] }}</td>
+                                        <td>
+                                            @if($project['status'] == 'ongoing')
+                                                <span class="badge bg-success">{{ $project['status'] }}</span>
+                                            @elseif($project['status'] == 'ended')
+                                                <span class="badge bg-secondary">{{ $project['status'] }}</span>
+                                            @else
+                                                <span class="badge bg-info">{{ $project['status'] }}</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $project->user->name }}</td>
                                         <td>{{ $project->client->name }}</td>
                                         <td>{{ $project['created_at']->format('Y-m-d') }}</td>

@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'phone' => ['required', 'numeric'],
             'state_id' => ['required'],
             'town_id' => ['required'],
-            'profile' => ['nullable', 'image', 'mimes:webp,jpeg,png,jpg,gif', 'max:2048'],
+            'profile' => ['image', 'mimes:webp,jpeg,png,jpg,gif', 'max:2048'],
         ]);
     }
 

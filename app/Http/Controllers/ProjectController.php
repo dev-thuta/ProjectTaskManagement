@@ -86,7 +86,6 @@ class ProjectController extends Controller
         $project->end_date = $request->end_date;
         $project->client_id = $request->client_id;
         $project->status = $request->status;
-        $project->client_id = $request->client_id;
         $project->save();
 
         return redirect('/projects')->with('success', 'Project updated successfully.');
