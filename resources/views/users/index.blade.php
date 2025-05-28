@@ -49,7 +49,7 @@
                                         <td>{{ $user->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ url("/users/edit/$user->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/users/delete/$user->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/users/delete/$user->id") }}" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

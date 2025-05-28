@@ -217,8 +217,8 @@
             {{-- sidebar --}}
             <aside class="col-2 p-0 custom-sidebar d-flex flex-column align-items-stretch">
                 <div class="py-3 text-center sidebar-home-link-container">
-                    <a href="{{ url('/') }}" class="text-decoration-none fs-4 sidebar-home-link">
-                        <i class="fa-solid fa-home"></i>
+                    <a href="{{ url('/home') }}" class="text-decoration-none fs-4 sidebar-home-link">
+                        <i class="fa-solid fa-house"></i> <!-- Changed fa-home to fa-house (more modern) -->
                     </a>
                 </div>
                 <div class="flex-grow-1 d-flex flex-column justify-content-between">
@@ -228,15 +228,15 @@
                                 <small class="text-muted">Master Data</small>
                             </span>
                             <a href="{{ url('/states') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('states*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-map-location-dot"></i>
+                                <i class="fa-solid fa-globe-americas"></i> <!-- More global/geographical icon -->
                                 <span class="d-none d-lg-inline ms-2">States / Regions</span>
                             </a>
                             <a href="{{ url('/towns') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('towns*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-location-dot"></i>
+                                <i class="fa-solid fa-city"></i> <!-- City icon for townships -->
                                 <span class="d-none d-lg-inline ms-2">Townships</span>
                             </a>
                             <a href="{{ url('/roles') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('roles*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-user-gear"></i>
+                                <i class="fa-solid fa-id-badge"></i> <!-- Role/User badge icon -->
                                 <span class="d-none d-lg-inline ms-2">Roles</span>
                             </a>
                         </div>
@@ -245,36 +245,35 @@
                                 <small class="text-muted">Transactions</small>
                             </span>
                             <a href="{{ url('/users') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('users*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-user-check"></i>
+                                <i class="fa-solid fa-user"></i> <!-- Simple user icon -->
                                 <span class="d-none d-lg-inline ms-2">Users</span>
                             </a>
                             <a href="{{ url('/clients') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('clients*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-handshake"></i>
+                                <i class="fa-solid fa-handshake-angle"></i> <!-- More handshake styled icon -->
                                 <span class="d-none d-lg-inline ms-2">Clients</span>
                             </a>
                             <a href="{{ url('/projects') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('projects*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-diagram-project"></i>
+                                <i class="fa-solid fa-diagram-project"></i> <!-- Keep same for projects -->
                                 <span class="d-none d-lg-inline ms-2">Projects</span>
                             </a>
                             <a href="{{ url('/teams') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('teams*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-users-gear"></i>
+                                <i class="fa-solid fa-users-cog"></i> <!-- More group/team icon -->
                                 <span class="d-none d-lg-inline ms-2">Teams</span>
                             </a>
                             <a href="{{ url('/team-members') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('team-members*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-users"></i>
+                                <i class="fa-solid fa-user-group"></i> <!-- User group icon for team members -->
                                 <span class="d-none d-lg-inline ms-2">Team Members</span>
                             </a>
                             <a href="{{ url('/tasks') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('tasks*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-list-check"></i>
+                                <i class="fa-solid fa-check-to-slot"></i> <!-- Modern task/check icon -->
                                 <span class="d-none d-lg-inline ms-2">Tasks</span>
                             </a>
                             <a href="{{ url('/assigns') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('assigns*') ? 'active' : '' }}">
-                                <i class="fa-solid fa-envelope"></i>
+                                <i class="fa-solid fa-user-plus"></i> <!-- Assign/add user icon -->
                                 <span class="d-none d-lg-inline ms-2">Assigned Members</span>
                             </a>
                         </div>
                     </div>
-                    {{-- You can add content to the bottom of the sidebar here if needed --}}
                 </div>
             </aside>
 
@@ -286,9 +285,14 @@
                 @yield('content')
                 {{-- </div> --}}
             </main>
-
         </div>
     </div>
+    <footer class="text-center text-white py-3" style="background-color: rgba(0,0,0,0.2);">
+        <div class="container">
+            <small>&copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.</small>
+        </div>
+    </footer>
+
     @stack('scripts')
 </body>
 </html>

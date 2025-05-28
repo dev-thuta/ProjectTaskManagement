@@ -39,7 +39,7 @@
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $task['name'] }}</td>
                                         <td>
-                                            <a href="{{ url("/assigns/add/$task->id") }}" class="btn btn-primary mb-1"><i class="fa-solid fa-plus"></i></a>
+                                            <a href="{{ url("/assigns/add/$task->id") }}" class="btn btn-outline-primary mb-1"><i class="fa-solid fa-plus"></i></a>
                                         </td>
                                         <td>
                                             @if($task->teamMembers->count() > 0)
@@ -68,7 +68,7 @@
                                         <td>{{ $task->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ url("/tasks/edit/$task->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/tasks/delete/$task->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/tasks/delete/$task->id") }}" onclick="return confirm('Are you sure you want to delete this task?');"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -25,7 +25,7 @@ class ClientController extends Controller
     {
         $validator = validator(request()->all(), [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:clients'],
             'phone' => ['required', 'numeric'],
             'profile' => ['nullable', 'image', 'mimes:webp,jpeg,png,jpg,gif', 'max:2048'],
         ]);
@@ -47,6 +47,35 @@ class ClientController extends Controller
         $client->save();
 
         return redirect('/clients')->with('success', 'Client created successfully.');
+    }
+
+    public function clientCreate()
+    {
+        $validator = validator(request()->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:clients'],
+            'phone' => ['required', 'numeric'],
+            'profile' => ['nullable', 'image', 'mimes:webp,jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+
+        if($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        if (request()->hasFile('profile')) {
+            $imagePath = request()->file('profile')->store('profiles', 'public');
+        }
+
+        $client = new Client;
+        $client->name = request()->name;
+        $client->email = request()->email;
+        $client->phone = request()->phone;
+        $client->created_by = auth()->id();
+        $client->profile = $imagePath;
+        $client->save();
+
+
+        return redirect()->back()->with('success', 'Client added successfully!');
     }
 
     public function edit($id)

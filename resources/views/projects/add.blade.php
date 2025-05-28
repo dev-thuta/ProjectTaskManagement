@@ -2,6 +2,18 @@
 
 @section('content')
 <div class="container">
+    @if(@session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if ($errors->any())
+    <script>
+        const clientModal = new bootstrap.Modal(document.getElementById('newClientModal'));
+        clientModal.show();
+    </script>
+    @endif
+
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -89,6 +101,10 @@
 
                         {{-- Client field --}}
                         <div class="mb-3">
+                            <a href="#" class="badge bg-purple mb-2 text-decoration-none" data-bs-toggle="modal" data-bs-target="#newClientModal">
+                                New Client
+                            </a>
+                            
                             <div class="form-floating">
                                 <select class="form-select @error('client_id') is-invalid @enderror" name="client_id" id="client_id">
                                     <option value="" disabled {{ old('client_id') ? '' : 'selected' }}>Select Client</option>
@@ -124,4 +140,77 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="newClientModal" tabindex="-1" aria-labelledby="newClientModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newClientModalLabel">Add New Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ url('/projects/clients/create') }}" enctype="multipart/form-data">
+                    @csrf
+                    {{-- name field --}}
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" autofocus>
+
+                            <label for="name" class="form-label">{{ __('Name') }}</label>
+                            @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    {{-- email field --}}
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
+
+                            <label for="email" class="form-label">{{ __('Email Address') }}</label>
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    {{-- phone field --}}
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone"
+                            value="{{ old('phone') }}" autocomplete="phone">
+
+                            <label for="phone" class="form-label">{{ __('Phone') }}</label>
+
+                            @error('phone')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    
+                    {{-- Profile field --}}
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input class="form-control" type="file" name="profile" id="profile" required>
+
+                            <label for="profile" class="form-label">{{ __('Profile') }}</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Client</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
+

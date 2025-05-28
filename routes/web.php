@@ -13,6 +13,7 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AssignToController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
-    // users
+
+Route::get('/home', [
+    DashboardController::class, 
+    'index'
+])->name('home');
+
+// users
 Route::get('/users', [
     UserController::class,
     'index'
@@ -176,6 +183,10 @@ Route::post('/projects/create', [
     ProjectController::class,
     'create'
 ]);
+Route::post('/projects/clients/create', [
+    ClientController::class,
+    'clientCreate'
+]);
 Route::get('/projects/edit/{id}', [
     ProjectController::class,
     'edit'
@@ -294,5 +305,3 @@ Route::get('assigns/delete/{id}', [
 ]);
 
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

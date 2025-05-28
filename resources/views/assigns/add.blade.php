@@ -37,7 +37,7 @@
                                     <option value="" disabled {{ old('team_member_id') ? '' : 'selected' }}>Select Team Member</option>
                                     @foreach($teammembers as $teammember)
                                     <option value="{{ $teammember['id'] }}" {{ old('team_member_id') == $teammember['id'] ? 'selected' : '' }}>
-                                    {{ $teammember->user->name }}
+                                    {{ $teammember->user->name }} | {{ $teammember['role'] }}
                                     </option>
                                     @endforeach
                                 </select>

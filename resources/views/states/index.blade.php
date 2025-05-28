@@ -36,7 +36,7 @@
                                         <td>{{ $state->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ url("/states/edit/$state->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/states/delete/$state->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/states/delete/$state->id") }}" onclick="return confirm('Are you sure you want to delete this state?');"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -56,7 +56,7 @@
                                         <td>{{ $project->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ url("/projects/edit/$project->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/projects/delete/$project->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/projects/delete/$project->id") }}" onclick="return confirm('Are you sure you want to delete this project?');"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

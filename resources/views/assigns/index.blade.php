@@ -59,7 +59,7 @@
                                         <td>{{ $assign->updated_at->diffForHumans() }}</td>
                                         <td>
                                             <a href="{{ url("/assigns/edit/$assign->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/assigns/delete/$assign->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/assigns/delete/$assign->id") }}" onclick="return confirm('Are you sure you want to delete this assigned member?');"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

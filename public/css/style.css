@@ -52,6 +52,26 @@
     border-color: #594fc3;
 }
 
+.card-body .btn-outline-primary {
+    color: #6a64e1;
+    background-color: transparent;
+    border: 1px solid #6a64e1;
+    font-weight: 600;
+    padding: 0.375rem 1rem;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-body .btn-outline-primary:hover {
+    background-color: #6a64e1;
+    color: #fff;
+    border-color: #6a64e1;
+}
+
+.text-purple {
+    color: #6a64e1;
+}
+
 /* Table Styling */
 .table {
     border-collapse: separate;

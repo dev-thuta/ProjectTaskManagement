@@ -38,7 +38,7 @@
                                         <td>{{ $role['updated_at'] ? $role['updated_at']->diffForHumans() : 'N/A' }}</td>
                                         <td>
                                             <a href="{{ url("/roles/edit/$role->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a class="btn btn-danger mb-1" href="{{ url("/roles/delete/$role->id") }}"><i class="fa-solid fa-trash"></i></a>
+                                            <a class="btn btn-danger mb-1" href="{{ url("/roles/delete/$role->id") }}" onclick="return confirm('Are you sure you want to delete this role?');"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

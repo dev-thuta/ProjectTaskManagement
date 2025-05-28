@@ -65,4 +65,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Town::class);
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'created_by');
+    }
 }

@@ -67,7 +67,7 @@
                         {{-- role field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select @error('role_id') is-invalid @enderror"" name="role_id" id="role_id">
+                                <select class="form-select @error('role_id') is-invalid @enderror" name="role_id" id="role_id">
                                     <option value="" disabled {{ old('role_id') ? '' : 'selected' }}>Select Role</option>
                                     @foreach($roles as $role)
                                     <option value="{{ $role['id'] }}" {{ old('role_id') == $role['id'] ? 'selected' : '' }}>
@@ -105,7 +105,7 @@
                         {{-- State field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select @error('state_id') is-invalid @enderror"" name="state_id" id="state_id">
+                                <select class="form-select @error('state_id') is-invalid @enderror" name="state_id" id="state_id">
                                     <option value="" disabled {{ old('state_id') ? '' : 'selected' }}>Select State</option>
                                     @foreach($states as $state)
                                     <option value="{{ $state['id'] }}" {{ old('state_id') == $state['id'] ? 'selected' : '' }}>
@@ -127,7 +127,7 @@
                         {{-- Town field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select @error('town_id') is-invalid @enderror"" name="town_id" id="town_id">
+                                <select class="form-select @error('town_id') is-invalid @enderror" name="town_id" id="town_id">
                                     <option value="" disabled {{ old('town_id') ? '' : 'selected' }}>Select Town</option>
                                     @foreach($towns as $town)
                                     <option value="{{ $town['id'] }}" {{ old('town_id') == $town['id'] ? 'selected' : '' }}>
