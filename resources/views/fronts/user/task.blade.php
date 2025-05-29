@@ -78,6 +78,8 @@
             <p>No assigned tasks found for you.</p>
         @endforelse
     </div>
+    <p class="no-tasks-message text-center text-muted my-3 d-none">No tasks found for the selected filter.</p>
+
 
     <h3 class="mb-4">Tasks Where You're Part of the Team</h3>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -152,6 +154,7 @@
             <p>No tasks found where you are part of the team.</p>
         @endforelse
     </div>
+    <p class="no-tasks-message text-center text-muted my-3 d-none">No tasks found for the selected filter.</p>
 </div>
 @endsection
 
@@ -159,8 +162,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
     const filterButtons = document.querySelectorAll(".filter-button");
-    // Select all immediate .col children inside the row that holds the cards
-    const taskCols = document.querySelectorAll(".row > .col");
 
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
@@ -170,15 +171,31 @@
             filterButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            // Show/hide .col elements based on their contained card's data-status
-            taskCols.forEach(col => {
-                const card = col.querySelector(".task-card");
-                const status = card?.getAttribute("data-status");
+            // Filter all task rows separately
+            document.querySelectorAll(".row").forEach(row => {
+                const cols = row.querySelectorAll(".col");
+                let visibleCount = 0;
 
-                if (filter === "all" || status === filter) {
-                    col.classList.remove("d-none");
-                } else {
-                    col.classList.add("d-none");
+                cols.forEach(col => {
+                    const card = col.querySelector(".task-card");
+                    const status = card?.getAttribute("data-status");
+
+                    if (filter === "all" || status === filter) {
+                        col.classList.remove("d-none");
+                        visibleCount++;
+                    } else {
+                        col.classList.add("d-none");
+                    }
+                });
+
+                // Show/hide the no-tasks message immediately after the row
+                const noTasksMsg = row.nextElementSibling;
+                if (noTasksMsg && noTasksMsg.classList.contains("no-tasks-message")) {
+                    if (visibleCount === 0) {
+                        noTasksMsg.classList.remove("d-none");
+                    } else {
+                        noTasksMsg.classList.add("d-none");
+                    }
                 }
             });
         });

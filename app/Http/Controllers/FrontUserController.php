@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Task;
 use App\Models\Team;
+use App\Models\Town;
+use App\Models\User;
+use App\Models\State;
 use App\Models\Project;
 use App\Models\AssignTo;
 use App\Models\TeamMember;
@@ -45,6 +49,21 @@ class FrontUserController extends Controller
 
         // Pass the user data to the view
         return view('fronts.user.profile', compact('user'));
+    }
+
+    public function edit($id)
+    {
+        $roledata = Role::all();
+        $statedata = State::all();
+        $towndata = Town::all();
+        $data = User::findOrFail($id);
+
+        return view('fronts.user.edit_profile', [
+            'roles' => $roledata,
+            'states' => $statedata,
+            'towns' => $towndata,
+            'user' => $data,
+        ]);
     }
 
     public function team()

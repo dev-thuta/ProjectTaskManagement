@@ -604,9 +604,11 @@ a:focus {
 }
 
 /* Section heading */
+[data-theme="dark"] h5,
 [data-theme="dark"] h4,
 [data-theme="dark"] h3,
-[data-theme="dark"] h2{
+[data-theme="dark"] h2,
+[data-theme="dark"] h1 {
     color: var(--header-text-color);
 }
 
@@ -641,7 +643,12 @@ a:focus {
     color: #fff;
 }
 
-
+[data-theme="dark"] .profile-status-card {
+    background-color: var(--card-bg) !important;
+    color: var(--dark-text-color);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    border-radius: 0.25rem; /* keep Bootstrap’s rounded */
+}
 
 /* Responsive Tweaks */
 @media (max-width: 992px) { /* Tablet and smaller */

@@ -323,6 +323,10 @@ Route::get('/front/users/view-profile', [
     FrontUserController::class,
     'show'
 ]);
+Route::get('/front/users/edit-profile/{id}', [
+    FrontUserController::class,
+    'edit'
+]);
 Route::get('/front/users/login', [
     FrontUserController::class,
     'login'

@@ -8,8 +8,9 @@
                 <div class="text-center mb-4">
                     <img src="{{ $user->profile ? asset('storage/' . $user->profile) : asset('default-avatar.png') }}" 
                                 alt="{{ $user->name }}" 
-                        class="rounded-circle img-thumbnail" style="width: 180px; height: 180px; object-fit: cover;">
-                    <h1 class="mt-3">{{ $user->name }}</h1>
+                        class="rounded-circle img-fluid" style="width: 180px; height: 180px; object-fit: cover;">
+                    <h1 class="mt-3">{{ $user->name }} 
+                    <a href="{{ url("/front/users/edit-profile/$user->id") }}" class="btn text-light"><i class="fa-solid fa-pen-to-square"></i></a></h1>
                     <p class="text-muted">{{ $user->role->name }}</p>
                 </div>
 
@@ -57,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="mt-4 p-3 bg-light rounded d-flex justify-content-between align-items-center shadow-sm">
+                <div class="profile-status-card mt-4 p-3 rounded d-flex justify-content-between align-items-center shadow-sm">
                     <div>
                         <h5 class="mb-1">Profile Status</h5>
                         <small class="text-muted">Your profile information is up to date</small>
@@ -66,7 +67,6 @@
                         <i class="ri-shield-check-line"></i>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
