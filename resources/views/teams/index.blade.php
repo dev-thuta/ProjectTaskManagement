@@ -21,6 +21,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Name</th>
+                                    <th>Add Member</th>
                                     <th>Project</th>
                                     <th>Description</th>
                                     <th>Created At</th>
@@ -34,6 +35,9 @@
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $team['name'] }}</td>
+                                        <td>
+                                            <a href="{{ url("/team-members/add/$team->id") }}" class="btn btn-outline-primary mb-1"><i class="fa-solid fa-plus"></i></a>
+                                        </td>
                                         <td>{{ $team->project->name }}</td>
                                         <td>{{ $team['description'] }}</td>
                                         <td>{{ $team['created_at']->format('Y-m-d') }}</td>

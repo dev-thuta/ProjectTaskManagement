@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class AssignTo extends Model
 {
     use HasFactory;
+    protected $casts = [
+        'end_date' => 'datetime',
+        'due_date' => 'datetime',
+    ];
 
-    public function task() 
+    public function task()
     {
-        return $this->belongsTo(Task::class);
+        return $this->belongsTo(Task::class, 'task_id');
     }
 
     public function teamMember() 

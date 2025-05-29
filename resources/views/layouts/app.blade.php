@@ -21,71 +21,81 @@
 
     <style>
         body {
-            background: linear-gradient(120deg, #6a64e1, #a084cf);
+            background: linear-gradient(120deg, var(--primary-color), #a084cf);
             min-height: 100vh;
             color: white;
-            font-family: 'Nunito', sans-serif;
+            font-family: var(--font-family-sans-serif);
         }
 
         /* Navbar Customization */
-        #app .navbar { /* Increased specificity */
-            background-color: rgba(0,0,0,0.15) !important; /* Subtle dark transparent, !important to override BS */
-            box-shadow: none !important; /* Remove default shadow */
+        #app .navbar {
+            background-color: rgba(0, 0, 0, 0.15) !important;
+            box-shadow: none !important;
         }
+
         #app .navbar .navbar-brand,
         #app .navbar .nav-link,
         #app .navbar .dropdown-toggle {
-            color: white !important;
+            color: var(--table-header-text) !important;
         }
+
         #app .navbar .nav-link:hover,
         #app .navbar .navbar-brand:hover,
         #app .navbar .dropdown-toggle:hover {
             color: #e0e0e0 !important;
         }
+
         #app .navbar-toggler {
-            border-color: rgba(255,255,255,0.5) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
         }
+
         #app .navbar-toggler-icon {
-            filter: invert(1) brightness(1.5); /* Makes the icon white/light */
+            filter: invert(1) brightness(1.5);
         }
-        /* Dropdown menu needs its own background for readability */
+
         #app .dropdown-menu {
-            background-color: #ffffff;
-            border: 1px solid rgba(0,0,0,0.05);
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border-color);
         }
+
         #app .dropdown-menu .dropdown-item {
-            color: #333333 !important;
+            color: var(--text-color) !important;
         }
+
         #app .dropdown-menu .dropdown-item:hover {
             background-color: #f5f5f5;
             color: #222222 !important;
         }
-         #app .dropdown-menu .dropdown-item form button.btn-link { /* For logout link if styled as button */
-            color: #333333 !important;
+
+        #app .dropdown-menu .dropdown-item form button.btn-link {
+            color: var(--text-color) !important;
             text-decoration: none;
         }
+
         #app .dropdown-menu .dropdown-item form button.btn-link:hover {
             color: #222222 !important;
         }
 
-
         /* Sidebar Customization */
         .custom-sidebar {
-            background-color: rgba(0,0,0,0.1) !important; /* Or transparent */
-            /* border-right: 1px solid rgba(255,255,255,0.1) !important; */ /* Optional subtle border */
+            background-color: rgba(0, 0, 0, 0.1) !important;
             box-shadow: none !important;
-            height: 100vh; /* Ensure it takes full viewport height alongside main content */
+            height: 100vh;
         }
+
         .custom-sidebar .sidebar-home-link-container {
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
+
         .custom-sidebar .sidebar-home-link {
-            color: white !important;
+            color: var(--table-header-text) !important;
             opacity: 0.9;
         }
+
         .custom-sidebar .sidebar-home-link:hover {
             opacity: 1;
         }
+
         .custom-sidebar .list-group-item {
             background-color: transparent !important;
             color: #e0e0e0 !important;
@@ -93,78 +103,86 @@
             padding-top: 0.8rem;
             padding-bottom: 0.8rem;
         }
+
         .custom-sidebar .list-group-item:hover,
-        .custom-sidebar .list-group-item:focus { /* Added focus for accessibility */
-            background-color: rgba(255,255,255,0.08) !important;
+        .custom-sidebar .list-group-item:focus {
+            background-color: rgba(255, 255, 255, 0.08) !important;
             color: white !important;
         }
+
         .custom-sidebar .list-group-item.active {
-            background-color: #ffffff !important;
-            color: #6a64e1 !important;
+            background-color: var(--card-bg) !important;
+            color: var(--primary-color) !important;
             font-weight: bold;
         }
+
         .custom-sidebar .list-group-item.active i {
-            color: #6a64e1 !important; /* Ensure icon color in active state */
+            color: var(--primary-color) !important;
         }
+
         .custom-sidebar .list-group-item i {
-            color: inherit; /* Inherit color from parent <a> which is #e0e0e0 or white on hover/active */
-            width: 20px; /* Align icons nicely */
-            margin-right: 2px; /* space before text if icon only on small screens */
+            color: inherit;
+            width: 20px;
+            margin-right: 2px;
         }
-        .custom-sidebar .list-group-item.disabled { /* For "Master Data", "Transactions" headers */
-            opacity: 1; /* Override Bootstrap's disabled opacity if needed */
+
+        .custom-sidebar .list-group-item.disabled {
+            opacity: 1;
         }
+
         .custom-sidebar .list-group-item.disabled small {
-            color: #c0c0c0 !important; /* Lighter muted text */
+            color: #c0c0c0 !important;
             font-weight: 500;
         }
 
         /* Main Content Area */
         .main-content-area {
-            background-color: transparent !important; /* Let body gradient show through */
-            padding-top: 20px; /* Add some padding */
+            background-color: transparent !important;
+            padding-top: 20px;
             padding-bottom: 20px;
-            /* min-height: calc(100vh - YOUR_NAVBAR_HEIGHT); /* Ensure it can fill height if content is short */ */
         }
 
-        /* Styling for content inside main-content-area (e.g., cards) */
         .main-content-area .card {
-            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white for depth */
-            color: #333333; /* Dark text for cards */
-            border: none; /* Remove card border or use a subtle one */
-            /* box-shadow: 0 2px 10px rgba(0,0,0,0.05); */ /* Optional subtle shadow for cards */
-        }
-        .main-content-area .card-header {
-             background-color: rgba(0,0,0,0.03);
-             border-bottom: 1px solid rgba(0,0,0,0.08);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: none;
         }
 
-        /* Fix row negative margins if they cause overflow with full-width gradient */
-        .container-fluid, .container {
+        .main-content-area .card-header {
+            background-color: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        /* Fix container paddings */
+        .container-fluid,
+        .container {
             padding-left: 15px;
             padding-right: 15px;
         }
-        /* The .row wrapper for sidebar/main content */
+
         .layout-row {
             margin-left: 0 !important;
             margin-right: 0 !important;
         }
-        .layout-row > [class*="col-"] { /* Target sidebar and main content columns */
+
+        .layout-row > [class*="col-"] {
             padding-left: 0 !important;
             padding-right: 0 !important;
         }
-        .main-content-area > .container, .main-content-area > .container-fluid {
-             padding-left: 20px; /* Inner padding for content area */
-             padding-right: 20px;
-        }
 
+        .main-content-area > .container,
+        .main-content-area > .container-fluid {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
     </style>
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ preg_replace('/(?<!^)([a-z])([A-Z])/', '$1 $2', config('app.name', 'Laravel')) }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

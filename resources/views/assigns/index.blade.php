@@ -34,7 +34,7 @@
                                 @foreach ($assigns as $assign)
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $assign->task->name }}</td>
+                                        <td>{{ $assign->task->name }} | {{ $assign->task->team->project->name }}</td>
                                         <td>
                                             @if($assign->teamMember)
                                                 {{ $assign->teamMember->user->name }}

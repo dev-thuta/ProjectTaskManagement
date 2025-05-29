@@ -18,17 +18,14 @@ class TeamMemberController extends Controller
         ]);
     }
 
-    public function add()
+    public function add($id)
     {
+
         $userdata = User::where('role_id', 2)->get();
-        $teamdata = Team::whereIn('project_id', function($query) {
-            $query->select('id')
-                ->from('projects')
-                ->where('created_by', auth()->id());
-        })->get();
+        $team = Team::with('project')->findOrFail($id);
         return view('team_members.add', [
             'users' => $userdata,
-            'teams' => $teamdata,
+            'team' => $team,
         ]);
     }
 
@@ -55,7 +52,7 @@ class TeamMemberController extends Controller
         $team_member->role = request()->role;
         $team_member->save();
 
-        return redirect('/team-members')->with('success', 'Team Member created successfully.');
+        return redirect('/teams')->with('success', 'Team Member created successfully.');
     }
 
     public function edit($id)

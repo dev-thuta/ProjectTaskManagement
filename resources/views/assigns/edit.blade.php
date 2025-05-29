@@ -67,14 +67,19 @@
                                     @enderror
                                 </div>
                             </div>
-
+                            
                             {{-- end date --}}
                             <div class="col-6">
                                 <div class="form-floating">
-                                    <input type="date" name="end_date" id="end_date" class="form-control @error('end_date') is-invalid @enderror" value="{{ old('end_date', $assign->end_date) }}">
+                                    <input type="date" name="end_date" id="end_date" 
+       class="form-control @error('end_date') is-invalid @enderror" 
+       value="{{ old('end_date', $assign->end_date ? $assign->end_date->format('Y-m-d') : '') }}">
+
                                     <label for="end_date" class="form-label">{{ __('End Date') }}</label>
                                     @error('end_date')
-                                        <span class="invalid-feedback"><strong>{{ $message }}</strong></span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                             </div>

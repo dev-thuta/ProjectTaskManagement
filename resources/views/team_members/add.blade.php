@@ -14,13 +14,10 @@
                         {{-- Team field --}}
                         <div class="mb-3">
                             <div class="form-floating">
-                                <select class="form-select @error('team_id') is-invalid @enderror" name="team_id" id="team_id">
-                                    <option value="" disabled {{ old('team_id') ? '' : 'selected' }}>Select Team</option>
-                                    @foreach($teams as $team)
+                                <select class="form-select @error('team_id') is-invalid @enderror" name="team_id" id="team_id" @readonly(true)>
                                     <option value="{{ $team['id'] }}" {{ old('team_id') == $team['id'] ? 'selected' : '' }}>
-                                    {{ $team['name'] }}
+                                    {{ $team['name'] }} | {{ $team->project->name }}
                                     </option>
-                                @endforeach
                                 </select>
 
                                 <label for="team_id" class="form-label">{{ __('Team') }}</label>
@@ -70,7 +67,7 @@
 
                                 @error('role')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                      <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>

@@ -11,7 +11,6 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">{{ __('Team Member List') }}
-                <a href="{{ url('/team-members/add')}}" class="btn btn-primary float-end">Add</a>
                 </div>
 
                 <div class="card-body">
@@ -33,7 +32,7 @@
                                 @foreach ($teammembers as $teammember)
                                     <tr>
                                         <td>{{ $i++ }}</td>
-                                        <td>{{ $teammember->team->name }}</td>
+                                        <td>{{ $teammember->team->name }} | {{ $teammember->team->project->name }}</td>
                                         <td>{{ $teammember->user->name }}</td>
                                         <td>{{ $teammember['role'] }}</td>
                                         <td>{{ $teammember['created_at']->format('Y-m-d') }}</td>

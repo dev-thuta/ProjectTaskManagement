@@ -11,9 +11,10 @@ use App\Http\Controllers\StateController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AssignToController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FrontUserController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -231,7 +232,7 @@ Route::get('/team-members', [
     TeamMemberController::class,
     'index'
 ]);
-Route::get('/team-members/add', [
+Route::get('/team-members/add/{id}', [
     TeamMemberController::class,
     'add'
 ]);
@@ -305,3 +306,24 @@ Route::get('assigns/delete/{id}', [
 ]);
 
 });
+
+Route::get('/front/users', [
+    FrontUserController::class,
+    'index'
+]);
+Route::get('/front/users/teams', [
+    FrontUserController::class,
+    'team'
+]);
+Route::get('/front/users/tasks', [
+    FrontUserController::class,
+    'task'
+]);
+Route::get('/front/users/view-profile', [
+    FrontUserController::class,
+    'show'
+]);
+Route::get('/front/users/login', [
+    FrontUserController::class,
+    'login'
+]);
