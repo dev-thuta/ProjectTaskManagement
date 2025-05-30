@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container py-5">
+        @if(@session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
         <div class="row justify-content-center">
             <div class="col-md-8">
 
@@ -10,7 +15,7 @@
                                 alt="{{ $user->name }}" 
                         class="rounded-circle img-fluid" style="width: 180px; height: 180px; object-fit: cover;">
                     <h1 class="mt-3">{{ $user->name }} 
-                    <a href="{{ url("/front/users/edit-profile/$user->id") }}" class="btn text-light"><i class="fa-solid fa-pen-to-square"></i></a></h1>
+                    <a href="{{ url("/front/users/edit-profile/$user->id") }}" class="btn btn-light"><i class="fa-solid fa-pen-to-square"></i></a></h1>
                     <p class="text-muted">{{ $user->role->name }}</p>
                 </div>
 

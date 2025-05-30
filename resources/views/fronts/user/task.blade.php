@@ -33,7 +33,12 @@
                         @php
                             $badgeClass = $statusColors[$assign->status] ?? 'secondary';
                         @endphp
-                        <span class="badge bg-{{ $badgeClass }} text-uppercase small">{{ $assign->status }}</span>
+                        <button type="button"
+                                class="badge bg-{{ $badgeClass }} text-uppercase small border-0"
+                                data-bs-toggle="modal"
+                                data-bs-target="#statusModal-{{ $assign->id }}">
+                            {{ $assign->status }}
+                        </button>
                     </div>
                     <div class="card-body">
                         <p class="text-muted small mb-3">{{ $task->description }}</p>
@@ -96,7 +101,6 @@
                      data-status="{{ $userAssign->status ?? 'unknown' }}">
                     <div class="card-header bg-light d-flex justify-content-between align-items-center rounded-top">
                         <h5 class="card-title mb-0">{{ $task->name }}</h5>
-                        <span class="badge bg-{{ $badgeClass }} text-uppercase small">{{ $userAssign->status ?? 'N/A' }}</span>
                     </div>
                     <div class="card-body">
                         <p class="text-muted small mb-3">{{ $task->description }}</p>
@@ -155,6 +159,33 @@
         @endforelse
     </div>
     <p class="no-tasks-message text-center text-muted my-3 d-none">No tasks found for the selected filter.</p>
+    @foreach($assigns as $assign)
+    <div class="modal fade" id="statusModal-{{ $assign->id }}" tabindex="-1" aria-labelledby="statusModalLabel-{{ $assign->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="POST" action="{{ url('/front/users/task/update/' . $assign->id) }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="statusModalLabel-{{ $assign->id }}">Update Task Status</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <select name="status" class="form-select">
+                            <option value="pending" {{ $assign->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                            <option value="ongoing" {{ $assign->status === 'ongoing' ? 'selected' : '' }}>In Progress</option>
+                            <option value="completed" {{ $assign->status === 'completed' ? 'selected' : '' }}>Completed</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+@endforeach
 </div>
 @endsection
 

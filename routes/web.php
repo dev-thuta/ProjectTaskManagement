@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontUserController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\UserLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -319,6 +320,10 @@ Route::get('/front/users/tasks', [
     FrontUserController::class,
     'task'
 ]);
+Route::put('/front/users/task/update/{id}', [
+    FrontUserController::class,
+    'updateTask'
+]);
 Route::get('/front/users/view-profile', [
     FrontUserController::class,
     'show'
@@ -327,7 +332,17 @@ Route::get('/front/users/edit-profile/{id}', [
     FrontUserController::class,
     'edit'
 ]);
+Route::put('/front/users/profile/update/{id}', [
+    FrontUserController::class,
+    'update'
+]);
 Route::get('/front/users/login', [
     FrontUserController::class,
     'login'
 ]);
+
+// User login routes
+Route::get('front/users/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
+Route::post('front/users/login', [UserLoginController::class, 'login']);
+Route::post('front/users/logout', [UserLoginController::class, 'logout'])->name('fronts.user.logout');
+

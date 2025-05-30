@@ -12,25 +12,33 @@ use App\Models\Project;
 use App\Models\AssignTo;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
 class FrontUserController extends Controller
 {
+    // Redirect if not authenticated
+    private function redirectIfGuest()
+    {
+        if (!auth()->check()) {
+            return redirect()->route('user.login')->with('error', 'Please log in first.');
+        }
+    }
+
     public function index()
     {
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
+
         $user = auth()->user();
 
-        // Projects where the user is part of the team
         $projects = Project::whereHas('team.teamMembers', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with('team')->get();
 
-        // Tasks where user is part of the task's team
         $tasks = Task::whereHas('team.teamMembers', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with('team')->get();
 
-        // Upcoming tasks assigned to the user
         $upcomingTasks = $tasks->filter(function ($task) use ($user) {
             return $task->assignTos->contains(function ($assign) use ($user) {
                 return $assign->teamMember->user_id === $user->id &&
@@ -44,15 +52,16 @@ class FrontUserController extends Controller
 
     public function show()
     {
-        // Get the authenticated user
-        $user = Auth::user();
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
 
-        // Pass the user data to the view
+        $user = auth()->user();
         return view('fronts.user.profile', compact('user'));
     }
 
     public function edit($id)
     {
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
+
         $roledata = Role::all();
         $statedata = State::all();
         $towndata = Town::all();
@@ -66,16 +75,74 @@ class FrontUserController extends Controller
         ]);
     }
 
+    public function update(Request $request, $id)
+    {
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
+
+        $user = User::findOrFail($id);
+        $validator = validator($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'string', 'min:8'],
+            'phone' => ['required', 'numeric'],
+            'state_id' => ['required', 'exists:states,id'],
+            'town_id' => ['required', 'exists:towns,id'],
+            'profile' => ['image', 'mimes:webp,jpeg,png,jpg,gif', 'max:2048'],
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        if ($request->hasFile('profile')) {
+            $imagePath = $request->file('profile')->store('profiles', 'public');
+            $user->profile = $imagePath;
+        }
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->phone = $request->phone;
+        $user->state_id = $request->state_id;
+        $user->town_id = $request->town_id;
+
+        $user->save();
+
+        return redirect('/front/users/view-profile')->with('success', 'Profile updated successfully.');
+    }
+
+    public function updateTask(Request $request, $id)
+    {
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
+
+        $validated = $request->validate([
+            'status' => 'required|in:pending,ongoing,completed',
+        ]);
+
+        $assign = AssignTo::findOrFail($id);
+
+        if ($assign->teamMember->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $assign->status = $validated['status'];
+        $assign->save();
+
+        return back()->with('success', 'Task status updated successfully.');
+    }
+
     public function team()
     {
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
+
         $user = auth()->user();
 
-        // Teams where user is a member
         $teams = Team::whereHas('teamMembers', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with('project')->get();
 
-        // Team members for those teams
         $teamMembers = TeamMember::whereHas('team', function ($query) use ($user) {
             $query->whereHas('teamMembers', function ($q) use ($user) {
                 $q->where('user_id', $user->id);
@@ -87,17 +154,17 @@ class FrontUserController extends Controller
 
     public function task()
     {
+        if ($redirect = $this->redirectIfGuest()) return $redirect;
+
         $user = auth()->user();
 
-        // Tasks where the user is part of the team
         $tasks = Task::whereHas('team.teamMembers', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with([
             'team',
-            'assignTos.teamMember.user', // Load all assigned users, not just current user
+            'assignTos.teamMember.user',
         ])->get();
 
-        // Assignments assigned directly to user
         $assigns = AssignTo::whereHas('teamMember', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->with(['task.team', 'teamMember.user'])->get();

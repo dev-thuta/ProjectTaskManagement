@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Update User') }}</div>
+                <div class="card-header">{{ __('Edit Profile') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('/users/update/' . $user->id) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('/front/users/profile/update/' . $user->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -49,29 +49,6 @@
                                 <label for="password" class="form-label">{{ __('Password') }} (leave blank to keep unchanged)</label>
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-
-                        {{-- role field --}}
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <select class="form-select @error('role_id') is-invalid @enderror" name="role_id" id="role_id">
-                                    <option value="" disabled {{ old('role_id', $user->role_id) ? '' : 'selected' }}>Select Role</option>
-                                    @foreach($roles as $role)
-                                    <option value="{{ $role['id'] }}" {{ old('role_id', $user->role_id) == $role['id'] ? 'selected' : '' }}>
-                                    {{ $role['name'] }}
-                                    </option>
-                                    @endforeach
-                                </select>
-
-                                <label for="role_id" class="form-label">{{ __('Role') }}</label>
-
-                                @error('role_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -158,7 +135,7 @@
                             @endif
                             <div class="col">
                                 <div class="d-flex justify-content-end gap-2 mb-5">
-                                    <a href="{{ url('/users') }}" class="btn btn-danger">Cancel</a>
+                                    <a href="{{ url('/front/users/view-profile') }}" class="btn btn-danger">Cancel</a>
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Update') }}
                                     </button>

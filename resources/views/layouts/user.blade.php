@@ -37,10 +37,15 @@
             <i class="fa-solid fa-list-check"></i>
         </a>
 
-        <a href="{{ url('front/users/login') }}"
-            class="sidebar-item {{ request()->is('front/users/login') ? 'active' : '' }}">
-            <i class="fas fa-door-open"></i>
+        <form id="logout-form" action="{{ route('fronts.user.logout') }}" method="POST" style="display:none;">
+            @csrf
+        </form>
+
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+        class="sidebar-item {{ request()->is('front/users/login') ? 'active' : '' }}">
+        <i class="fas fa-door-open"></i>
         </a>
+
     </div>
 
 
