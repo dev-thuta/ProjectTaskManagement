@@ -45,7 +45,8 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $roledata = Role::all();
+        $roledata = Role::where('id', '!=', 2)->get();
+
         $statedata = State::all();
         $towndata = Town::all();
         return view('auth.register', [
