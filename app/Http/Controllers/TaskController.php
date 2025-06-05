@@ -12,7 +12,11 @@ class TaskController extends Controller
 {
     public function index()
     {
-        $data = Task::with(['project', 'team', 'teamMembers.user'])->paginate(7);
+        $data = Task::with(['project', 'team', 'teamMembers.user'])
+            ->whereHas('team.project', function ($query) {
+                    $query->where('created_by', auth()->id());
+                })
+            ->paginate(7);
         return view('tasks.index', [
             'tasks' => $data,
         ]);

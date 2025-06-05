@@ -10,7 +10,7 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $data = Client::with('user')->orderBy('name', 'asc')->paginate(7);
+        $data = Client::with('user')->where('created_by', auth()->id())->orderBy('name', 'asc')->paginate(7);
         return view('clients.index', [
             'clients' => $data,
         ]);

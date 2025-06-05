@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $data = Project::with('user', 'client')->orderBy('name', 'asc')->paginate(7);
+        $data = Project::with('user', 'client')->where('created_by', auth()->id())->orderBy('name', 'asc')->paginate(7);
         return view('projects.index', [
             'projects' => $data,
         ]);

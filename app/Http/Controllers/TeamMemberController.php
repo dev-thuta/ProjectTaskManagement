@@ -12,7 +12,11 @@ class TeamMemberController extends Controller
 {
     public function index()
     {
-        $data = TeamMember::with('team', 'user')->orderBy('team_id', 'asc')->paginate(7);
+        $data = TeamMember::with('team', 'user')
+            ->whereHas('team.project', function ($query) {
+                    $query->where('created_by', auth()->id());
+                })
+            ->orderBy('team_id', 'asc')->paginate(7);
         return view('team_members.index', [
             'teammembers' => $data
         ]);

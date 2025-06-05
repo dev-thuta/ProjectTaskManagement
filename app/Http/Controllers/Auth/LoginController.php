@@ -52,4 +52,19 @@ class LoginController extends Controller
     //     Auth::logout(); // Optional: logout users with invalid roles
     //     return '/login';
     // }
+
+    protected function attemptLogin(\Illuminate\Http\Request $request)
+    {
+        $credentials = $this->credentials($request);
+
+        // Check if user exists and has allowed role
+        $user = \App\Models\User::where('email', $credentials['email'])->first();
+
+        if (!$user || $user->role_id == 2) {
+            return false; // deny login
+        }
+
+        return Auth::attempt($credentials, $request->filled('remember'));
+    }
+
 }

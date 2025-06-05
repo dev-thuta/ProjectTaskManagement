@@ -11,10 +11,18 @@ class TeamController extends Controller
 {
     public function index()
     {
-        $data = Team::with('project')->orderBy('name', 'asc')->paginate(7);
+        
+        $data = Team::with('project')
+            ->whereHas('project', function ($query) {
+                $query->where('created_by', auth()->id());
+            })
+            ->orderBy('name', 'asc')
+            ->paginate(7);
+
         return view('teams.index', [
             'teams' => $data
         ]);
+
     }
 
     public function add()

@@ -11,7 +11,11 @@ class AssignToController extends Controller
 {
     public function index()
     {
-        $data = AssignTo::with(['task', 'teamMember.user'])->paginate(7);
+        $data = AssignTo::with(['task', 'teamMember.user'])
+            ->whereHas('task.team.project', function ($query) {
+                    $query->where('created_by', auth()->id());
+                })
+            ->paginate(7);
         return view('assigns.index', [
             'assigns' => $data,
         ]);
