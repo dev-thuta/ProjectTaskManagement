@@ -68,23 +68,27 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $user = User::findOrFail($id);
+        $this->authorize('update', $user);
+
         $roledata = Role::all();
         $statedata = State::all();
         $towndata = Town::all();
-        $data = User::findOrFail($id);
 
         return view('users.edit', [
             'roles' => $roledata,
             'states' => $statedata,
             'towns' => $towndata,
-            'user' => $data,
+            'user' => $user,
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $user = User::findOrFail($id);
-        $validator = validator(request()->all(), [
+        $user = User::findOrFail($id); //
+        $this->authorize('update', $user);
+
+        $validator = validator($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => ['nullable', 'string', 'min:8'],
@@ -119,10 +123,11 @@ class UserController extends Controller
         return redirect('/users')->with('success', 'User updated successfully.');
     }
 
-
     public function delete($id)
     {
-        $user = User::find($id);
+        $user = User::findOrFail($id);
+        $this->authorize('delete', $user);
+
         $user->delete();
 
         return redirect('/users')->with('success', 'User deleted successfully.');

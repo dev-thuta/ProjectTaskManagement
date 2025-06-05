@@ -48,8 +48,12 @@
                                         <td>{{ $user['created_at']->format('Y-m-d') }}</td>
                                         <td>{{ $user->updated_at->diffForHumans() }}</td>
                                         <td>
+                                            @can('update', $user)
                                             <a href="{{ url("/users/edit/$user->id") }}" class="btn btn-warning mb-1"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            @endcan
+                                            @can('delete', $user)
                                             <a class="btn btn-danger mb-1" href="{{ url("/users/delete/$user->id") }}" onclick="return confirm('Are you sure you want to delete this user?');"><i class="fa-solid fa-trash"></i></a>
+                                            @endcan
                                         </td>
                                     </tr>
                                 @endforeach
