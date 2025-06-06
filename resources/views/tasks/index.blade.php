@@ -25,6 +25,7 @@
                                     <th>Assigned Members</th>
                                     <th>Description</th>
                                     <th>Priority</th>
+                                    <th>Type</th>
                                     <th>Project</th>
                                     <th>Team</th>
                                     <th>Created At</th>
@@ -62,6 +63,8 @@
                                                 <span class="badge bg-success">{{ $task['priority'] }}</span>
                                             @endif
                                         </td>
+                                        <td>{{ ucfirst($task->type) }}</td>
+
                                         <td>{{ $task->project->name }}</td>
                                         <td>{{ $task->team->name }}</td>
                                         <td>{{ $task['created_at']->format('Y-m-d') }}</td>

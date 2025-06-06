@@ -14,9 +14,10 @@ class TaskController extends Controller
     {
         $data = Task::with(['project', 'team', 'teamMembers.user'])
             ->whereHas('team.project', function ($query) {
-                    $query->where('created_by', auth()->id());
-                })
+                $query->where('created_by', auth()->id());
+            })
             ->paginate(7);
+
         return view('tasks.index', [
             'tasks' => $data,
         ]);
@@ -26,39 +27,42 @@ class TaskController extends Controller
     {
         $projectdata = Project::where('created_by', auth()->id())->get();
         $teamdata = Team::all();
+
         return view('tasks.add', [
             'projects' => $projectdata,
             'teams' => $teamdata,
         ]);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $validator = validator(request()->all(), [
+        $validator = validator($request->all(), [
             'name' => [
-                 'required',
+                'required',
                 'string',
                 'max:255',
-                Rule::unique('tasks')->where(function ($query) {
-                    return $query->where('team_id', request()->team_id);
+                Rule::unique('tasks')->where(function ($query) use ($request) {
+                    return $query->where('team_id', $request->team_id);
                 }),
             ],
             'description' => ['required', 'string'],
-            'priority' => ['required', 'string'],
-            'project_id' => ['required'],
-            'team_id' => ['required'],
+            'priority' => ['required', 'string', Rule::in(['high', 'medium', 'low'])],
+            'type' => ['required', 'string', Rule::in(['requirement', 'design', 'development', 'testing', 'deployment', 'maintenance'])],
+            'project_id' => ['required', 'exists:projects,id'],
+            'team_id' => ['required', 'exists:teams,id'],
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
 
-        $task = new Task;
-        $task->name = request()->name;
-        $task->description = request()->description;
-        $task->priority = request()->priority;
-        $task->project_id = request()->project_id;
-        $task->team_id = request()->team_id;
+        $task = new Task();
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->priority = $request->priority;
+        $task->type = $request->type;  // <-- Added type here
+        $task->project_id = $request->project_id;
+        $task->team_id = $request->team_id;
         $task->save();
 
         return redirect('/tasks')->with('success', 'Task created successfully.');
@@ -80,17 +84,20 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
         $task = Task::findOrFail($id);
-        $validator = validator(request()->all(), [
+
+        $validator = validator($request->all(), [
             'name' => [
                 'required',
+                'string',
                 Rule::unique('tasks')->where(function ($query) use ($request) {
-                    return $query->where('id', $request->team_id);
+                    return $query->where('team_id', $request->team_id);
                 })->ignore($id),
             ],
             'description' => ['required', 'string'],
-            'priority' => ['required', 'string'],
-            'project_id' => ['required'],
-            'team_id' => ['required'],
+            'priority' => ['required', 'string', Rule::in(['high', 'medium', 'low'])],
+            'type' => ['required', 'string', Rule::in(['requirement', 'design', 'development', 'testing', 'deployment', 'maintenance'])],
+            'project_id' => ['required', 'exists:projects,id'],
+            'team_id' => ['required', 'exists:teams,id'],
         ]);
 
         if ($validator->fails()) {
@@ -100,6 +107,7 @@ class TaskController extends Controller
         $task->name = $request->name;
         $task->description = $request->description;
         $task->priority = $request->priority;
+        $task->type = $request->type; // <-- Added type here
         $task->project_id = $request->project_id;
         $task->team_id = $request->team_id;
         $task->save();
@@ -109,7 +117,7 @@ class TaskController extends Controller
 
     public function delete($id)
     {
-        $task = Task::find($id);
+        $task = Task::findOrFail($id);
         $task->delete();
 
         return redirect('/tasks')->with('success', 'Task deleted successfully.');

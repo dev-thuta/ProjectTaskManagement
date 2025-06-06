@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->enum('priority', ["high", "medium", "low"]);
+            $table->enum('type', ['requirement', 'design', 'development', 'testing', 'deployment', 'maintenance']);
             $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
             $table->timestamps();

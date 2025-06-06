@@ -60,6 +60,30 @@
                             </div>
                         </div>
 
+                        {{-- Type field --}}
+<div class="mb-3">
+    <div class="form-floating">
+        <select class="form-select @error('type') is-invalid @enderror" name="type" id="type">
+            <option value="" disabled {{ old('type') ? '' : 'selected' }}>Select Type</option>
+            <option value="requirement" {{ old('type') == 'requirement' ? 'selected' : '' }}>Requirement</option>
+            <option value="design" {{ old('type') == 'design' ? 'selected' : '' }}>Design</option>
+            <option value="development" {{ old('type') == 'development' ? 'selected' : '' }}>Development</option>
+            <option value="testing" {{ old('type') == 'testing' ? 'selected' : '' }}>Testing</option>
+            <option value="deployment" {{ old('type') == 'deployment' ? 'selected' : '' }}>Deployment</option>
+            <option value="maintenance" {{ old('type') == 'maintenance' ? 'selected' : '' }}>Maintenance</option>
+        </select>
+
+        <label for="type" class="form-label">{{ __('Type') }}</label>
+
+        @error('type')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+
+
                         {{-- Project field --}}
                         <div class="mb-3">
                             <div class="form-floating">
