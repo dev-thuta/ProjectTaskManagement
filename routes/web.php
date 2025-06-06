@@ -9,6 +9,7 @@ use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AssignToController;
 use App\Http\Controllers\DashboardController;
@@ -306,6 +307,32 @@ Route::get('assigns/delete/{id}', [
     'delete'
 ]);
 
+
+Route::get('/messages', [
+    MessageController::class,
+    'index'
+]);
+Route::get('/messages/add/', [
+    MessageController::class,
+    'add'
+]);
+Route::post('/messages/create', [
+    MessageController::class,
+    'create'
+]);
+Route::get('/messages/edit/{id}', [
+    MessageController::class,
+    'edit'
+]);
+Route::put('/messages/update/{id}', [
+    MessageController::class,
+    'update'
+]);
+Route::get('messages/delete/{id}', [
+    MessageController::class,
+    'delete'
+]);
+
 });
 
 Route::get('/front/users', [
@@ -340,9 +367,14 @@ Route::get('/front/users/login', [
     FrontUserController::class,
     'login'
 ]);
-
+    // Handle sending message from dashboard form
+Route::post('/front/users/send', [FrontUserController::class, 'sendMessage']);
 // User login routes
 Route::get('front/users/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
 Route::post('front/users/login', [UserLoginController::class, 'login']);
 Route::post('front/users/logout', [UserLoginController::class, 'logout'])->name('fronts.user.logout');
+
+
+
+
 

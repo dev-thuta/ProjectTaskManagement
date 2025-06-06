@@ -8,12 +8,15 @@ use App\Models\Team;
 use App\Models\Town;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Message;
 use App\Models\Project;
 use App\Models\AssignTo;
 use App\Models\TeamMember;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 class FrontUserController extends Controller
 {
@@ -25,30 +28,39 @@ class FrontUserController extends Controller
         }
     }
 
-    public function index()
-    {
-        if ($redirect = $this->redirectIfGuest()) return $redirect;
+public function index()
+{
+    $user = auth()->user();
 
-        $user = auth()->user();
+    $projects = Project::whereHas('team.teamMembers', function ($query) use ($user) {
+        $query->where('user_id', $user->id);
+    })->with('team')->get();
 
-        $projects = Project::whereHas('team.teamMembers', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->with('team')->get();
+    $tasks = Task::whereHas('team.teamMembers', function ($query) use ($user) {
+        $query->where('user_id', $user->id);
+    })->with('team')->get();
 
-        $tasks = Task::whereHas('team.teamMembers', function ($query) use ($user) {
-            $query->where('user_id', $user->id);
-        })->with('team')->get();
-
-        $upcomingTasks = $tasks->filter(function ($task) use ($user) {
-            return $task->assignTos->contains(function ($assign) use ($user) {
-                return $assign->teamMember->user_id === $user->id &&
-                    $assign->end_date &&
-                    $assign->end_date->isFuture();
-            });
+    $upcomingTasks = $tasks->filter(function ($task) use ($user) {
+        return $task->assignTos->contains(function ($assign) use ($user) {
+            return $assign->teamMember->user_id === $user->id &&
+                $assign->end_date &&
+                $assign->end_date->isFuture();
         });
+    });
 
-        return view('fronts.user.index', compact('projects', 'tasks', 'upcomingTasks'));
-    }
+    // Messages received by user, latest 10, with sender relationship eager loaded
+    $messages = Message::where('receiver_id', $user->id)
+                ->with('sender')
+                ->latest()
+                ->paginate(10);
+
+    // Other users to send messages to (exclude current user)
+    $users = User::where('id', '!=', $user->id)->orderBy('name')->get();
+
+    return view('fronts.user.index', compact('projects', 'tasks', 'upcomingTasks', 'messages', 'users'));
+}
+
+
 
     public function show()
     {
@@ -176,4 +188,26 @@ class FrontUserController extends Controller
     {
         return view('fronts.user.login');
     }
+
+    public function sendMessage(Request $request)
+{
+    $user = auth()->user();
+
+    $validator = Validator::make($request->all(), [
+        'receiver_id' => 'required|exists:users,id|not_in:'.$user->id,
+        'message' => 'required|string|max:1000',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    Message::create([
+        'sender_id' => $user->id,
+        'receiver_id' => $request->receiver_id,
+        'message' => $request->message,
+    ]);
+
+    return redirect()->back()->with('success', 'Message sent successfully!');
+}
 }

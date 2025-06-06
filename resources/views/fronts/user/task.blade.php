@@ -75,6 +75,11 @@
                                     <span class="badge bg-success">Low</span>
                                 @endif
                             </li>
+                            <li class="mb-2">
+    <i class="bi bi-tag-fill me-2 text-info"></i>
+    <strong>Type:</strong> {{ ucfirst($task->type ?? 'N/A') }}
+</li>
+
                         </ul>
                     </div>
                 </div>

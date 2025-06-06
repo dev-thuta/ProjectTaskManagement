@@ -290,6 +290,10 @@
                                 <i class="fa-solid fa-user-plus"></i> <!-- Assign/add user icon -->
                                 <span class="d-none d-lg-inline ms-2">Assigned Members</span>
                             </a>
+                            <a href="{{ url('/messages') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('messages*') ? 'active' : '' }}">
+                                <i class="fa-solid fa-message"></i> <!-- Assign/add user icon -->
+                                <span class="d-none d-lg-inline ms-2">Messages</span>
+                            </a>
                         </div>
                     </div>
                 </div>
