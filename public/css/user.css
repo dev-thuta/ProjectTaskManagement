@@ -4,109 +4,113 @@
 :root {
     --font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-    /* Light Theme (Default) */
-    --bg-color: #f4f7f9; /* Lighter gray for background */
-    --sidebar-bg: #ffffff;
-    --sidebar-icon-color: #5a67d8; /* Indigo */
-    --sidebar-icon-hover-bg: #e0e7ff; /* Lighter Indigo */
-    --sidebar-icon-active-bg: #5a67d8;
-    --sidebar-icon-active-color: #ffffff;
-    --text-color: #1a202c; /* Darker Gray for text */
-    --card-bg: #ffffff;
-    --card-border-color: #e2e8f0; /* Light Gray for borders */
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --header-text-color: #2d3748; /* Slightly lighter than main text */
-    --subtle-text-color: #718096; /* Gray for paragraph text */
-    --table-header-bg: #5a67d8;
-    --table-header-text: #ffffff;
-    --table-row-hover-bg: #e0e7ff;
-    --primary-color: #5a67d8; /* Indigo */
-    --primary-color-hover: #4c51bf; /* Darker Indigo */
-    --link-color: #5a67d8;
-    --link-hover-color: #434190;
-    --border-radius: 0.5rem; /* Consistent border radius */
-    --input-bg: #fff;
-    --input-border: #cbd5e0;
-    --color-bg-card: #fff;
-    --color-text-primary: #212529;
-    --color-text-muted: #6c757d;
-    --color-bg-badge-primary: #6f42c1; /* purple */
+    /* Light Theme (White and Black Base with Gradient) */
+    --bg-color: linear-gradient(135deg, #ffffff 0%, #3456a5 100%);
+    --sidebar-bg: linear-gradient(180deg, #f9fafb 0%, #dfe3e8 100%);
+    --sidebar-icon-color: #000000; /* Black icons */
+    --sidebar-icon-hover-bg: #0c55bc; /* Dark Teal */
+    --sidebar-icon-active-bg: #0c55bc; /* Dark Teal */
+    --sidebar-icon-active-color: #ffffff; /* White */
+    --side-bar-shadow: 8px 0 10px rgba(0, 0, 0, 0.1);
+    --text-color: #000000; /* Black text */
+    --card-bg: linear-gradient(135deg, #ffffff 0%,#427fd4 50%, #266ed2 100%);
+    --card-bg2: linear-gradient(135deg, #7fb4e8de 0%, #ffffff 100%);
+    --card-border-color: #dcdcdc; /* Light gray borders */
+    --header-text-color: #111111; /* Almost black */
+    --subtle-text-color: #666666; /* Medium gray */
+    --table-header-bg: #1059a2; /* Deep Navy */
+    --table-header-text: #ffffff; /* White text */
+    --table-row-hover-bg: #256db6; /* Dark Teal */
+    --primary-color: #004d40; /* Dark Teal */
+    --primary-color-hover: #00332c; /* Darker Teal */
+    --link-color: #004d40; /* Dark Teal */
+    --link-hover-color: #001f3f; /* Deep Navy */
+    --border-radius:30px; /* Consistent border radius */
+    --input-bg: #ffffff; /* White inputs */
+    --input-border: #cccccc; /* Light gray border */
+    --color-bg-card: #ffffff;
+    --color-text-primary: #000000;
+    --color-text-muted: #666666;
+    --color-bg-badge-primary: #004d40; /* Dark Teal */
 }
 
 [data-theme="dark"] {
-    --bg-color: #1a202c; /* Dark Gray */
-    --sidebar-bg: #2d3748; /* Slightly Lighter Dark Gray */
-    --sidebar-icon-color: #a3bffa; /* Light Blue for icons */
-    --sidebar-icon-hover-bg: #4a5568; /* Medium Gray */
-    --sidebar-icon-active-bg: #a3bffa;
-    --sidebar-icon-active-color: #1a202c;
-    --text-color: #e2e8f0; /* Light Gray for text */
-    --card-bg: #2d3748;
-    --card-border-color: #4a5568;
-    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    --header-text-color: #cbd5e0;
-    --subtle-text-color: #a0aec0;
-    --table-header-bg: #4c51bf; /* Darker Indigo */
-    --table-header-text: #ffffff;
-    --table-row-hover-bg: #4a5568;
-    --primary-color: #7f9cf5; /* Lighter Indigo for dark mode */
-    --primary-color-hover: #667eea;
-    --link-color: #7f9cf5;
-    --link-hover-color: #9faff6;
-    --input-bg: #2d3748;
-    --input-border: #4a5568;
-    --color-bg-card: #1f1f1f;
-    --color-text-primary: #e1e1e1;
-    --color-text-muted: #adb5bd;
-    --color-bg-white-text: #1f1f1f; /* White text on dark background */
-    --color-bg-badge-primary: #9f7aea; /* lighter purple */
+    /* Dark Theme (Black and White Base with Gradient) */
+    --bg-color: linear-gradient(135deg, #615d5d 0%, #353434 50%, #000000cb 100%);
+    --sidebar-bg: linear-gradient(180deg, #121212 0%, #1a1a1a 100%);
+    --sidebar-icon-color: #ffffff; /* White icons */
+    --sidebar-icon-hover-bg: #004d4077; /* Dark Teal */
+    --sidebar-icon-active-bg: #004d40; /* Dark Teal */
+    --sidebar-icon-active-color: #ffffff; /* White */
+    --side-bar-shadow: 8px 0 10px rgba(255, 255, 255, 0.1);
+    --text-color: #ffffff; /* White text */
+    --card-bg: linear-gradient(135deg, #0e0d0dc0 0%, #ffffff 100%);
+    --card-bg2: linear-gradient(135deg, #cfc9c9 0%, #454545a7 100%);
+    --card-border-color: #333333; /* Medium dark border */
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+    --header-text-color: #eeeeee; /* Light text */
+    --subtle-text-color: #999999; /* Gray */
+    --table-header-bg: #001f3fcb; /* Deep Navy */
+    --table-header-text: #ffffff; /* White */
+    --table-row-hover-bg: #004d40; /* Dark Teal */
+    --primary-color: #004d40; /* Dark Teal */
+    --primary-color-hover: #001f3f; /* Deep Navy */
+    --link-color: #004d40; /* Dark Teal */
+    --link-hover-color: #001f3f; /* Deep Navy */
+    --input-bg: #1a1a1a; /* Dark input background */
+    --input-border: #444444; /* Darker border */
+    --color-bg-card: #121212;
+    --color-text-primary: #ffffff;
+    --color-text-muted: #999999;
+    --color-bg-white-text: #121212;
+    --color-bg-badge-primary: #004d40; /* Dark Teal */
 }
 
 body {
     font-family: var(--font-family-sans-serif);
     margin: 0;
-    background-color: var(--bg-color)!important;
+    background-image: var(--bg-color);
     color: var(--text-color);
     display: flex;
     min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Sidebar Styles */
 .sidebar {
-    width: 80px; /* Increased width for better touch targets */
-    background-color: var(--sidebar-bg);
+    width: 80px;
+    background: var(--sidebar-bg);
     padding-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--side-bar-shadow);
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     z-index: 1000;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s ease;
 }
 
 .sidebar-item {
     color: var(--sidebar-icon-color);
-    padding: 15px; /* Increased padding */
+    padding: 15px;
     margin-bottom: 10px;
-    border-radius: var(--border-radius);
+    border-radius:50px;
     text-decoration: none;
-    font-size: 1.5rem; /* Larger icons */
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px; /* Ensure consistent width for hover effect */
-    height: 50px; /* Ensure consistent height for hover effect */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 55px;
+    height: 55px;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 .sidebar-item:hover {
     background-color: var(--sidebar-icon-hover-bg);
-    color: var(--primary-color); /* Use primary color on hover for better visibility */
+    color: var(--primary-color);
     text-decoration: none;
 }
 
@@ -121,14 +125,15 @@ body {
 
 .sidebar-item:hover i {
     transform: scale(1.1);
+    color: var(--card-border-color);
 }
 
 /* Theme Toggle Styles */
 .theme-toggle {
     display: inline-block;
     position: relative;
-    width: 50px; /* Slightly smaller */
-    height: 28px; /* Slightly smaller */
+    width: 50px;
+    height: 28px;
     margin-bottom: 20px;
     cursor: pointer;
 }
@@ -148,14 +153,14 @@ body {
     bottom: 0;
     background-color: #ccc;
     transition: .4s;
-    border-radius: 28px; /* Fully rounded */
+    border-radius: 28px;
 }
 
 .theme-slider:before {
     position: absolute;
     content: "";
-    height: 20px; /* Smaller circle */
-    width: 20px;  /* Smaller circle */
+    height: 20px;
+    width: 20px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -168,60 +173,62 @@ input:checked + .theme-slider {
 }
 
 input:checked + .theme-slider:before {
-    transform: translateX(22px); /* Adjusted for new size */
+    transform: translateX(22px);
 }
 
 /* Main Content Styles */
 .main-content {
-    margin-left: 80px; /* Same as sidebar width */
-    padding: 20px;    /* Default padding */
+    margin-left: 80px;
+    padding: 20px;
     flex-grow: 1;
-    overflow-y: auto; /* Allow scrolling for content */
+    overflow-y: auto;
     transition: margin-left 0.3s ease;
 }
-
+.te-cl{
+    color: var(--text-color);
+}
 
 /* Container and General Layout */
 .container {
-    max-width: 100%; /* Use full width available in main-content */
-    padding-left: 20px; /* Consistent padding */
-    padding-right: 20px; /* Consistent padding */
-    margin: 0 auto; /* Center content if max-width is set */
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0 auto;
 }
 
 .header {
     margin-bottom: 30px;
     padding: 20px;
-    background-color: var(--card-bg);
+    background: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
 }
 
 .header h1 {
-    font-size: 2rem; /* Responsive font size */
+    font-size: 2rem;
     color: var(--header-text-color);
     margin-bottom: 0.5rem;
     font-weight: 600;
 }
 
 .header p {
-    font-size: 1rem; /* Responsive font size */
+    font-size: 1rem;
     color: var(--subtle-text-color);
     line-height: 1.6;
 }
 
 /* Enhanced Table Card */
 .table-card {
-    background-color: var(--card-bg);
+    background: var(--card-bg2);
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     margin-bottom: 30px;
-    overflow: hidden; /* Ensures border radius is respected by children */
+    overflow: hidden;
 }
 
 .table-header {
     padding: 1rem 1.5rem;
-    background-color: var(--primary-color); /* Use primary color for header */
+    background-color: var(--table-header-bg);
     color: var(--table-header-text);
     border-bottom: 1px solid var(--card-border-color);
     display: flex;
@@ -238,36 +245,36 @@ input:checked + .theme-slider:before {
 
 .table-header h2 i {
     margin-right: 0.75rem;
-    font-size: 1.1em; /* Slightly larger icon */
+    font-size: 1.1em;
 }
 
 .table-container {
-    padding: 0; /* Remove padding if table has its own */
-    overflow-x: auto; /* For responsive tables */
+    padding: 0;
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
-    border-collapse: collapse; /* Changed from separate for a cleaner look */
+    border-collapse: collapse;
     color: var(--text-color);
 }
 
 table thead tr {
-    background-color: var(--bg-color); /* Use variable for consistency */
+    background-color: var(--bg-color);
     color: var(--primary-color);
     text-align: left;
 }
 
 table th {
-    padding: 0.75rem 1.5rem; /* Increased padding */
+    padding: 0.75rem 1.5rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    border-bottom: 2px solid var(--primary-color-hover); /* Stronger border */
+    border-bottom: 2px solid var(--primary-color-hover);
 }
 
 table tbody tr {
-    background-color: var(--card-bg); /* Rows match card background */
+    background-color: var(--card-bg);
     border-bottom: 1px solid var(--card-border-color);
     transition: background-color 0.2s ease, transform 0.15s ease;
 }
@@ -279,49 +286,46 @@ table tbody tr:last-child {
 table tbody tr:hover {
     background-color: var(--table-row-hover-bg);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 table td {
-    padding: 0.75rem 1.5rem; /* Increased padding */
+    padding: 0.75rem 1.5rem;
     vertical-align: middle;
 }
 
-/* General Card Styles (from user and enhanced) */
-
+/* General Card Styles */
 .card {
-  background-color: var(--card-bg) !important;
-  border: 1px solid var(--card-border-color) !important;
-  box-shadow: var(--card-shadow) !important;
-  color: var(--text-color) !important;
-  transition: transform 0.2s ease-in-out;
+    background: var(--card-bg2) !important;
+    border: 1px solid var(--card-border-color) !important;
+    box-shadow: var(--card-shadow) !important;
+    color: var(--text-color) !important;
+    transition: transform 0.2s ease-in-out;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+    transform: translateY(-5px);
 }
 
 .card-header {
-  background-color: var(--sidebar-bg) !important;
-  color: var(--header-text-color) !important;
-  border-bottom: 1px solid var(--card-border-color) !important;
+    background: var(--sidebar-bg) !important;
+    color: var(--header-text-color) !important;
+    border-bottom: 1px solid var(--card-border-color) !important;
 }
 
 [data-theme="dark"] .card-header {
-  background-color: var(--primary-color-hover) !important;
-  color: var(--header-text-color) !important;
+    background-color: var(--primary-color-hover) !important;
+    color: var(--header-text-color) !important;
 }
 
-
-
 .card-icon-bg {
-    font-size: 2.5rem; /* Larger background icon */
+    font-size: 2.5rem;
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
     opacity: 0.1;
-    color: currentColor; /* Inherits color from .card-header */
+    color: currentColor;
 }
 
 .card-header-content {
@@ -331,7 +335,7 @@ table td {
 
 .card-title {
     margin: 0;
-    font-size: 1.1rem; /* Consistent with card-header font-size */
+    font-size: 1.1rem;
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -339,12 +343,12 @@ table td {
 
 .card-title i {
     margin-right: 0.5rem;
-    font-size: 1em; /* Icon size relative to title */
+    font-size: 1em;
 }
 
 .card-content {
     padding: 1.25rem;
-    flex-grow: 1; /* Allows card to fill height if needed */
+    flex-grow: 1;
 }
 
 .card-description {
@@ -353,23 +357,23 @@ table td {
     color: var(--text-color);
     line-height: 1.6;
 }
+
 [data-theme="dark"] .card-description {
-    color: var(--color-bg-white-text); /* Use subtle text color in dark mode */
+    color: var(--color-bg-white-text);
 }
 
-
-/* Button Styles (from user) */
+/* Button Styles */
 .btn-primary, .card-header .btn-primary, .card-body .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
-    color: white; /* Ensure text is white */
+    color: white;
     font-weight: 600;
-    padding: 0.5rem 1.25rem; /* Standardized padding */
+    padding: 0.5rem 1.25rem;
     font-size: 0.9rem;
     border-radius: var(--border-radius);
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    text-decoration: none; /* Remove underline from <a> tags styled as buttons */
-    display: inline-block; /* Proper alignment and spacing */
+    text-decoration: none;
+    display: inline-block;
     text-align: center;
     cursor: pointer;
 }
@@ -401,31 +405,23 @@ table td {
     border-color: var(--primary-color);
 }
 
-.text-purple { /* This class was in your CSS, mapping to primary color */
+.text-purple {
     color: var(--primary-color);
 }
 
-/* Table Styles (from user - some merged above) */
-/* .table is styled above */
-/* .table thead tr is styled above */
-/* .table thead th is styled above */
-/* .table tbody tr is styled above */
-/* .table tbody tr:hover is styled above */
-/* .table tbody td is styled above */
-
-
-/* Badge Styles (from user and enhanced) */
+/* Badge Styles */
 .badge {
     font-weight: 600;
-    font-size: 0.8rem; /* Slightly smaller for better fit */
-    padding: 0.3em 0.6em; /* Adjusted padding */
-    border-radius: 0.35rem; /* Slightly smaller radius */
+    font-size: 0.8rem;
+    padding: 0.3em 0.6em;
+    border-radius: 0.35rem;
     text-transform: capitalize;
     box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-    display: inline-block; /* Ensure proper layout */
-    line-height: 1; /* Prevent extra space */
+    display: inline-block;
+    line-height: 1;
     transition: filter 0.2s ease;
 }
+
 .badge:hover {
     filter: brightness(0.9);
     cursor: default;
@@ -463,23 +459,22 @@ table td {
 
 .badge.bg-success { background-color: #198754; color: #fff; border: 1px solid #157347; }
 .badge.bg-secondary { background-color: #6c757d; color: #fff; border: 1px solid #565e64; }
-.badge.bg-info { background-color: #0dcaf0; color: #212529; border: 1px solid #0aa2c0; } /* Changed text to dark for better contrast */
+.badge.bg-info { background-color: #0dcaf0; color: #212529; border: 1px solid #0aa2c0; }
 .badge.bg-danger { background-color: #dc3545; color: #fff; border: 1px solid #b02a37; }
 .badge.bg-warning { background-color: #ffc107; color: #212529; border: 1px solid #d39e00; }
 .badge.bg-light { background-color: #f8f9fa; color: #212529; border: 1px solid #d6d8db; }
 .badge.bg-dark { background-color: #212529; color: #fff; border: 1px solid #1a1e21; }
 .badge.bg-purple { background-color: var(--primary-color); color: #fff; border: 1px solid var(--primary-color-hover); }
 
-
-/* Buttons in Action Column (from user) */
+/* Buttons in Action Column */
 .btn-warning, .btn-danger {
-    padding: 0.3rem 0.6rem; /* Adjusted padding */
-    font-size: 0.8rem; /* Adjusted font size */
-    line-height: 1.2; /* Adjusted line height */
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+    line-height: 1.2;
     border-radius: 0.3rem;
     transition: background-color 0.3s ease, border-color 0.3s ease;
-    color: white; /* Ensure text is white for danger */
-    margin-right: 0.25rem; /* Add some spacing between buttons */
+    color: white;
+    margin-right: 0.25rem;
 }
 .btn-warning:last-child, .btn-danger:last-child {
     margin-right: 0;
@@ -490,28 +485,27 @@ table td {
 .btn-danger { background-color: #dc3545; border-color: #dc3545; color: white; }
 .btn-danger:hover { background-color: #b02a37; border-color: #842029; color: white; }
 
-
-/* Alert Success (from user) */
+/* Alert Success */
 .alert-success {
-    background-color: #d1e7dd; /* Bootstrap 5 success bg */
-    color: #0f5132;      /* Bootstrap 5 success text */
-    border: 1px solid #badbcc; /* Bootstrap 5 success border */
+    background-color: #d1e7dd;
+    color: #0f5132;
+    border: 1px solid #badbcc;
     border-radius: var(--border-radius);
     padding: 1rem 1.25rem;
     margin-bottom: 1rem;
 }
 
-/* Pagination Styling (from user) */
+/* Pagination Styling */
 .pagination {
     justify-content: center;
-    margin-top: 2rem; /* Add some space above pagination */
-    padding-left: 0; /* Reset ul padding */
-    list-style: none; /* Remove list bullets */
-    display: flex; /* Align items in a row */
+    margin-top: 2rem;
+    padding-left: 0;
+    list-style: none;
+    display: flex;
 }
 
 .pagination .page-item {
-    margin: 0 0.25rem; /* Space between page items */
+    margin: 0 0.25rem;
 }
 
 .pagination .page-link {
@@ -520,7 +514,7 @@ table td {
     border: 1px solid var(--primary-color);
     padding: 0.5rem 0.75rem;
     text-decoration: none;
-    display: block; /* Ensure link fills the item */
+    display: block;
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -534,22 +528,21 @@ table td {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     color: white;
-    z-index: 3; /* Bring active page link to front */
+    z-index: 3;
 }
 
 .pagination .page-item.disabled .page-link {
-    color: #6c757d; /* Gray for disabled */
+    color: #6c757d;
     pointer-events: none;
-    background-color: var(--bg-color); /* Match page background */
+    background-color: var(--bg-color);
     border-color: var(--card-border-color);
 }
 
-
-/* General Link Styles (from user) */
+/* General Link Styles */
 a {
     color: var(--link-color);
     text-decoration: none;
-    font-weight: 500; /* Adjusted from 600 for better balance */
+    font-weight: 500;
     transition: color 0.2s ease;
 }
 
@@ -560,6 +553,11 @@ a:focus {
     outline: none;
 }
 
+p{
+   color: var(--text-color);
+}
+
+
 /* Links inside badges */
 .badge a { color: inherit; text-decoration: none; font-weight: 600; }
 .badge a:hover, .badge a:focus { text-decoration: underline; color: inherit; }
@@ -567,91 +565,11 @@ a:focus {
 /* Links inside buttons */
 .btn a, .btn a:hover, .btn a:focus { color: inherit; text-decoration: none; }
 
-/* Override bootstrap default link color in navbar (example, if you had a navbar) */
-/* This might not be directly applicable if you don't have a .navbar styled this way */
-/* #app .navbar .nav-link,
-#app .navbar .navbar-brand,
-#app .navbar .dropdown-toggle {
-    color: white !important;
-    font-weight: 600;
-}
-
-#app .navbar .nav-link:hover,
-#app .navbar .navbar-brand:hover,
-#app .navbar .dropdown-toggle:hover {
-    color: #e0e0e0 !important;
-} */
-
 /* Links inside table rows for action buttons */
 .table .btn a, .table .btn a:hover, .table .btn a:focus { color: inherit; text-decoration: none; }
 
-/* === TEAM PAGE DARK MODE TWEAKS === */
-[data-theme="dark"] .team-member-card {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border: 1px solid var(--card-border-color);
-}
-
-/* Ensure text in headings and paragraphs is readable */
-[data-theme="dark"] .team-member-card h5,
-[data-theme="dark"] .team-member-card p {
-    color: var(--text-color);
-}
-
-/* For muted text (like roles and emails) */
-[data-theme="dark"] .team-member-card p.text-muted {
-    color: var(--subtle-text-color) !important;
-}
-
-/* Section heading */
-[data-theme="dark"] h5,
-[data-theme="dark"] h4,
-[data-theme="dark"] h3,
-[data-theme="dark"] h2,
-[data-theme="dark"] h1 {
-    color: var(--header-text-color);
-}
-
-[data-theme="dark"] p,
-[data-theme="dark"] .text-muted {
-    color: var(--text-color) !important;
-}
-
-
-/* Team project badge */
-[data-theme="dark"] .badge.bg-purple {
-    background-color: var(--color-bg-badge-primary);
-    color: #fff;
-}
-
-/* Optional: fallback for Bootstrap's bg-secondary in dark mode */
-[data-theme="dark"] .badge.bg-secondary {
-    background-color: #718096;
-    color: #fff;
-}
-
-/* Upcoming tasks card/list items */
-[data-theme="dark"] .list-group-item {
-    background-color: var(--card-bg);
-    color: var(--text-color);
-    border-color: #2c2c2c;
-}
-
-/* Badge (e.g., due in 2 days) */
-[data-theme="dark"] .badge.bg-danger {
-    background-color: #e63946; /* or another bright red */
-    color: #fff;
-}
-
-[data-theme="dark"] .profile-status-card {
-    background-color: var(--card-bg) !important;
-    color: var(--dark-text-color);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    border-radius: 0.25rem; /* keep Bootstrap’s rounded */
-}
-
 /* Responsive Tweaks */
-@media (max-width: 992px) { /* Tablet and smaller */
+@media (max-width: 992px) {
     .header h1 {
         font-size: 1.75rem;
     }
@@ -663,20 +581,20 @@ a:focus {
     }
 }
 
-@media (max-width: 768px) { /* Mobile landscape and smaller */
+@media (max-width: 768px) {
     .sidebar {
         width: 100%;
-        height: 60px; /* Fixed height for top bar */
+        height: 60px;
         flex-direction: row;
-        justify-content: space-around; /* Distribute items */
+        justify-content: space-around;
         padding-top: 0;
-        bottom: 0; /* Position at bottom */
+        bottom: 0;
         top: auto;
         box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
     }
     .sidebar-item {
         margin-bottom: 0;
-        margin-right: 5px; /* Spacing for horizontal items */
+        margin-right: 5px;
         padding: 10px;
         font-size: 1.2rem;
         width: auto;
@@ -687,17 +605,16 @@ a:focus {
     }
     .theme-toggle {
         margin-bottom: 0;
-        margin-left: 10px; /* Add some space if needed */
-        /* Or position it differently if sidebar is at bottom */
+        margin-left: 10px;
     }
     .main-content {
         margin-left: 0;
-        padding-bottom: 80px; /* Space for bottom sidebar */
+        padding-bottom: 80px;
         padding-top: 20px;
     }
-    .table-responsive { /* You might need to wrap tables in a div with this class */
+    .table-responsive {
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        -webkit-overflow-scrolling: touch;
     }
     .card-header .btn-primary {
         float: none !important;
@@ -706,14 +623,14 @@ a:focus {
         margin-top: 0.5rem;
     }
     .cards-grid {
-        grid-template-columns: 1fr; /* Stack cards on mobile */
+        grid-template-columns: 1fr;
     }
     .header {
         text-align: center;
     }
 }
 
-@media (max-width: 576px) { /* Small mobile */
+@media (max-width: 576px) {
     .header h1 {
         font-size: 1.5rem;
     }
@@ -722,10 +639,11 @@ a:focus {
     }
     table th, table td {
         padding: 0.5rem 0.75rem;
-        font-size: 0.85rem; /* Smaller font for table content on small screens */
+        font-size: 0.85rem;
     }
     .btn-primary, .btn-outline-primary {
         padding: 0.4rem 1rem;
         font-size: 0.85rem;
     }
 }
+

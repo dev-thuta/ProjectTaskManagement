@@ -2,15 +2,15 @@
 
 @section('content')
 <div class="container py-5">
-    <h2 class="text-center mb-5 fw-bold">Meet Our Teams</h2>
+    <h2 class="text-center te-cl mb-5 fw-bold">Meet Our Teams</h2>
 
     @foreach($teams as $team)
         <div class="mb-5">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div>
-                    <h4 class="fw-semibold mb-1">{{ $team->name }}</h4>
+                    <h4 class="fw-semibold te-cl mb-1">{{ $team->name }}</h4>
                     @if($team->description)
-                        <p class="text-muted mb-0">{{ $team->description }}</p>
+                        <p class="te-cl mb-0">{{ $team->description }}</p>
                     @endif
                 </div>
 

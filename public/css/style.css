@@ -233,6 +233,7 @@
 /* Pagination Styling */
 .pagination {
     justify-content: center;
+    gap: 4px;
 }
 
 .pagination .page-link {
