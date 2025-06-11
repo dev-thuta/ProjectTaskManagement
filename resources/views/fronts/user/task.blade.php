@@ -18,6 +18,24 @@
                 'ongoing' => 'purple',
                 'pending' => 'info',
             ];
+
+            $typeColors = [
+                'requirement' => 'primary',
+                'design' => 'info',
+                'development' => 'warning',
+                'testing' => 'danger',
+                'deployment' => 'success',
+                'maintenance' => 'secondary',
+            ];
+
+            $sdlcPhases = [
+                'requirement' => 0,
+                'design' => 1,
+                'development' => 2,
+                'testing' => 3,
+                'deployment' => 4,
+                'maintenance' => 5,
+            ];
         @endphp
 
         @forelse($assigns as $assign)
@@ -76,11 +94,33 @@
                                 @endif
                             </li>
                             <li class="mb-2">
-    <i class="bi bi-tag-fill me-2 text-info"></i>
-    <strong>Type:</strong> {{ ucfirst($task->type ?? 'N/A') }}
-</li>
-
+                                <i class="bi bi-tag-fill me-2 text-info"></i>
+                                <strong>Type:</strong> {{ ucfirst($task->type ?? 'N/A') }}
+                            </li>
                         </ul>
+
+                        @php
+                            $currentPhaseIndex = $sdlcPhases[$task->type] ?? -1;
+                            $progressPercentage = ($currentPhaseIndex >= 0 && count($sdlcPhases) > 1)
+                                ? round(($currentPhaseIndex / (count($sdlcPhases) - 1)) * 100)
+                                : 0;
+                        @endphp
+
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <small class="fw-semibold text-muted">
+                                    Project: {{ $task->project->name ?? 'N/A' }}
+                                </small>
+                                <small class="text-muted">
+                                    {{ ucfirst($task->type ?? 'N/A') }} ({{ $progressPercentage }}%)
+                                </small>
+                            </div>
+                            <div class="progress" style="height: 8px;" title="SDLC Progress">
+                                <div class="progress-bar bg-{{ $typeColors[$task->type] ?? 'secondary' }}"
+                                     style="width: {{ $progressPercentage }}%;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,13 +130,17 @@
     </div>
     <p class="no-tasks-message text-center text-muted my-3 d-none">No tasks found for the selected filter.</p>
 
-
     <h3 class="mb-4">Tasks Where You're Part of the Team</h3>
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @forelse($tasks as $task)
             @php
                 $userAssign = $task->assignTos->first();
                 $badgeClass = $statusColors[$userAssign->status ?? ''] ?? 'secondary';
+
+                $currentPhaseIndex = $sdlcPhases[$task->type] ?? -1;
+                $progressPercentage = ($currentPhaseIndex >= 0 && count($sdlcPhases) > 1)
+                    ? round(($currentPhaseIndex / (count($sdlcPhases) - 1)) * 100)
+                    : 0;
             @endphp
             <div class="col">
                 <div class="card task-card shadow-sm h-100 border-0 rounded-3"
@@ -156,6 +200,22 @@
                                 <li>No users assigned</li>
                             @endforelse
                         </ul>
+
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <small class="fw-semibold text-muted">
+                                    Project: {{ $task->project->name ?? 'N/A' }}
+                                </small>
+                                <small class="text-muted">
+                                    {{ ucfirst($task->type ?? 'N/A') }} ({{ $progressPercentage }}%)
+                                </small>
+                            </div>
+                            <div class="progress" style="height: 8px;" title="SDLC Progress">
+                                <div class="progress-bar bg-{{ $typeColors[$task->type] ?? 'secondary' }}"
+                                     style="width: {{ $progressPercentage }}%;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,6 +224,7 @@
         @endforelse
     </div>
     <p class="no-tasks-message text-center text-muted my-3 d-none">No tasks found for the selected filter.</p>
+
     @foreach($assigns as $assign)
     <div class="modal fade" id="statusModal-{{ $assign->id }}" tabindex="-1" aria-labelledby="statusModalLabel-{{ $assign->id }}" aria-hidden="true">
         <div class="modal-dialog">
@@ -190,24 +251,22 @@
             </div>
         </div>
     </div>
-@endforeach
+    @endforeach
 </div>
 @endsection
 
 @push('scripts')
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
     const filterButtons = document.querySelectorAll(".filter-button");
 
     filterButtons.forEach(button => {
         button.addEventListener("click", () => {
             const filter = button.getAttribute("data-filter");
 
-            // Toggle active class on filter buttons
             filterButtons.forEach(btn => btn.classList.remove("active"));
             button.classList.add("active");
 
-            // Filter all task rows separately
             document.querySelectorAll(".row").forEach(row => {
                 const cols = row.querySelectorAll(".col");
                 let visibleCount = 0;
@@ -224,7 +283,6 @@
                     }
                 });
 
-                // Show/hide the no-tasks message immediately after the row
                 const noTasksMsg = row.nextElementSibling;
                 if (noTasksMsg && noTasksMsg.classList.contains("no-tasks-message")) {
                     if (visibleCount === 0) {
@@ -237,6 +295,5 @@
         });
     });
 });
-
 </script>
 @endpush
