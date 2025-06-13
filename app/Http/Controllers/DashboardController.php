@@ -36,4 +36,43 @@ class DashboardController extends Controller
         ]);
 
     }
+
+    public function report(Request $request)
+{
+    $userId = auth()->id();
+
+    $startDate = $request->input('start_date');
+    $endDate = $request->input('end_date');
+    $status = $request->input('status');
+
+    $query = Project::with('client')->where('created_by', $userId);
+
+    if ($startDate && $endDate) {
+        $query->whereBetween('created_at', [$startDate, $endDate]);
+    }
+
+    if ($status && in_array($status, ['pending', 'ongoing', 'completed'])) {
+        $query->where('status', $status);
+    }
+
+    $projects = $query->get();
+
+    $report = [
+        'total'     => $projects->count(),
+        'completed' => $projects->where('status', 'completed')->count(),
+        'ongoing'   => $projects->where('status', 'ongoing')->count(),
+        'pending'   => $projects->where('status', 'pending')->count(),
+    ];
+
+    return view('reports.projects', [
+        'projects' => $projects,
+        'report' => $report,
+        'startDate' => $startDate,
+        'endDate' => $endDate,
+        'status' => $status,
+    ]);
+}
+
+
+
 }

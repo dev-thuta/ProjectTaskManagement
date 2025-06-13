@@ -69,6 +69,9 @@ Route::get('users/delete/{id}', [
     'delete'
 ]);
 
+Route::get('/project-report', [DashboardController::class, 'report'])->name('projects.report');
+
+
 // roles
 Route::get('/roles', [
     RoleController::class,

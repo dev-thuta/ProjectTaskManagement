@@ -294,6 +294,10 @@
                                 <i class="fa-solid fa-message"></i> <!-- Assign/add user icon -->
                                 <span class="d-none d-lg-inline ms-2">Messages</span>
                             </a>
+                            <a href="{{ url('/project-report') }}" class="list-group-item list-group-item-action rounded-0 {{ Request::is('project-report*') ? 'active' : '' }}">
+                                <i class="fa-solid fa-flag"></i>
+                                <span class="d-none d-lg-inline ms-2">Report</span>
+                            </a>
                         </div>
                     </div>
                 </div>
